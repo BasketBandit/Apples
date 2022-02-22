@@ -8,5 +8,10 @@
                 <p class="lead">Loved by minion enthusiasts.</p>
             </div>
         </div>
+        <div class="container text-center mt-2">
+            <div class="box border m-2" th:each="letterLength : ${letters}">
+                <a th:href="${letterLength}" th:text="${letterLength}"></a>
+            </div>
+        </div>
     </body>
 </html>

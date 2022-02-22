@@ -1,0 +1,14 @@
+.box {
+    display: inline-flex;
+    width: 90px;
+    height: 90px;
+    background: #eeeeee;
+}
+
+.box a {
+    text-decoration: none;
+    color: #222222;
+    width: 100%;
+    text-align: center;
+    line-height: 90px;
+}

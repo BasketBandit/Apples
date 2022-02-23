@@ -3,6 +3,9 @@
     width: 90px;
     height: 90px;
     background: #eeeeee;
+    justify-content: center;
+    line-height: 161.8%;
+    font-size: 36pt;
 }
 
 .box a {
@@ -11,4 +14,12 @@
     width: 100%;
     text-align: center;
     line-height: 90px;
+}
+
+.in {
+    font-size: 36pt;
+}
+
+#submit {
+    height: 86px;
 }

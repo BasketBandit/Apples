@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="head"></head>
+    <body>
+        <div class="shadow-sm p-4">
+            <div class="container px-4">
+                <h1 class="display-4">Words</h1>
+                <p class="lead">Loved by minion enthusiasts.</p>
+            </div>
+        </div>
+
+        <div class="container text-center mt-3">
+            <div class="input-group mb-3">
+                <input type="text" class="in form-control" th:maxlength="${length}">
+                <div class="input-group-append">
+                    <button id="submit" class="btn btn-outline-secondary" type="button">Submit</button>
+                </div>
+            </div>
+
+            <div th:id="a+${x}" th:each="x:${#numbers.sequence(1, 5, 1)}" th:data_id="${x}">
+                <div th:id="l+${y}" class="box border m-1" th:each="y:${#numbers.sequence(1, length, 1)}" th:data_id="${y}"></div>
+            </div>
+        </div>
+
+        <script th:inline="javascript">
+            $(document).ready(function() {
+                var wordLetters = [[${word}]].split("");
+                var attempts = [];
+
+                $('.btn').on('click', function() {
+                     attempts.push($(".in").val().toUpperCase());
+                     for(var i = 1; i < attempts.length+1; i++) {
+                        var letters = attempts[i-1].split("")
+                        for(var j = 1; j < letters.length+1; j++) {
+                            $("#a"+i+" #l"+j).text(letters[j-1])
+                            if(letters[j-1] == wordLetters[j-1]) {
+                                $("#a"+i+" #l"+j).css('background', '#00ff00');
+                            } else if(wordLetters.includes(letters[j-1])) {
+                                $("#a"+i+" #l"+j).css('background', '#FFBF00');
+                            }
+                        }
+                     }
+                })
+            })
+        </script>
+
+    </body>
+</html>

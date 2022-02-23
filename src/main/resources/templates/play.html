@@ -20,6 +20,8 @@
             <div th:id="a+${x}" th:each="x:${#numbers.sequence(1, 5, 1)}" th:data_id="${x}">
                 <div th:id="l+${y}" class="box border m-1" th:each="y:${#numbers.sequence(1, length, 1)}" th:data_id="${y}"></div>
             </div>
+
+            <div id="notification"></div>
         </div>
 
         <script th:inline="javascript">
@@ -28,7 +30,7 @@
                 var wordLetters = [[${word}]].split("");
                 var attempts = [];
 
-                $('.btn').on('click', function() {
+                function submitAttempt() {
                     var attempt = $(".in").val().toUpperCase();
 
                     // validates an attempt for length and if it is a dictionary word
@@ -47,6 +49,16 @@
                             $("#a"+(index+1)+" #l"+i).css('background', '#FFBF00');
                         }
                     }
+                }
+
+                $(".in").keydown(function(e){
+                     if(e.keyCode === 13) {
+                           submitAttempt();
+                     }
+                });
+
+                $('.btn').on('click', function() {
+                    submitAttempt();
                 })
             })
         </script>

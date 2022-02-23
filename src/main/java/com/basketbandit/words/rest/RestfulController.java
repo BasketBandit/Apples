@@ -27,6 +27,7 @@ public class RestfulController {
     public ModelAndView play(@PathVariable int type) {
         ArrayList<String> list = words.get(type);
         ModelAndView modelAndView = new ModelAndView("play");
+        modelAndView.addObject("words", list);
         modelAndView.addObject("word", list.get(new Random(System.currentTimeMillis()).nextInt(list.size()-1)));
         modelAndView.addObject("length", type);
         return modelAndView;

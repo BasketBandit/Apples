@@ -11,7 +11,7 @@
 
         <div class="container text-center mt-3">
             <div class="input-group mb-3">
-                <input type="text" class="in form-control" th:maxlength="${length}">
+                <input type="text" class="in form-control" th:maxlength="${length}" th:minlength="${length}" onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)">
                 <div class="input-group-append">
                     <button id="submit" class="btn btn-outline-secondary" type="button">Submit</button>
                 </div>
@@ -24,11 +24,19 @@
 
         <script th:inline="javascript">
             $(document).ready(function() {
+                var words = [[${words}]];
                 var wordLetters = [[${word}]].split("");
                 var attempts = [];
 
                 $('.btn').on('click', function() {
-                    attempts.push($(".in").val().toUpperCase());
+                    var attempt = $(".in").val().toUpperCase();
+
+                    // validates an attempt for length and if it is a dictionary word
+                    if(attempt.length < wordLetters.length || !words.includes(attempt)) {
+                        return;
+                    }
+
+                    attempts.push(attempt);
                     var index = attempts.length-1;
                     var letters = attempts[index].split("")
                     for(var i = 1; i < letters.length+1; i++) {

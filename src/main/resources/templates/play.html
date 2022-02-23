@@ -28,18 +28,17 @@
                 var attempts = [];
 
                 $('.btn').on('click', function() {
-                     attempts.push($(".in").val().toUpperCase());
-                     for(var i = 1; i < attempts.length+1; i++) {
-                        var letters = attempts[i-1].split("")
-                        for(var j = 1; j < letters.length+1; j++) {
-                            $("#a"+i+" #l"+j).text(letters[j-1])
-                            if(letters[j-1] == wordLetters[j-1]) {
-                                $("#a"+i+" #l"+j).css('background', '#00ff00');
-                            } else if(wordLetters.includes(letters[j-1])) {
-                                $("#a"+i+" #l"+j).css('background', '#FFBF00');
-                            }
+                    attempts.push($(".in").val().toUpperCase());
+                    var index = attempts.length-1;
+                    var letters = attempts[index].split("")
+                    for(var i = 1; i < letters.length+1; i++) {
+                        $("#a"+(index+1)+" #l"+i).text(letters[i-1])
+                        if(letters[i-1] == wordLetters[i-1]) {
+                            $("#a"+(index+1)+" #l"+i).css('background', '#00ff00');
+                        } else if(wordLetters.includes(letters[i-1])) {
+                            $("#a"+(index+1)+" #l"+i).css('background', '#FFBF00');
                         }
-                     }
+                    }
                 })
             })
         </script>

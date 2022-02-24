@@ -29,8 +29,13 @@
                 var words = [[${words}]];
                 var wordLetters = [[${word}]].split("");
                 var attempts = [];
+                var finished = false;
 
                 function submitAttempt() {
+                    if(attempts.length > 4 || finished) {
+                        return;
+                    }
+
                     var attempt = $(".in").val().toUpperCase();
 
                     // validates an attempt for length and if it is a dictionary word
@@ -41,13 +46,18 @@
                     attempts.push(attempt);
                     var index = attempts.length-1;
                     var letters = attempts[index].split("")
+                    var correctPosition = 0;
                     for(var i = 1; i < letters.length+1; i++) {
                         $("#a"+(index+1)+" #l"+i).text(letters[i-1])
                         if(letters[i-1] == wordLetters[i-1]) {
                             $("#a"+(index+1)+" #l"+i).css('background', '#00ff00');
+                            correctPosition++;
                         } else if(wordLetters.includes(letters[i-1])) {
                             $("#a"+(index+1)+" #l"+i).css('background', '#FFBF00');
                         }
+                    }
+                    if(correctPosition == wordLetters.length) {
+                        finished = true;
                     }
                 }
 

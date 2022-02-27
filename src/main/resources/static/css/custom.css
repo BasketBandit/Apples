@@ -1,3 +1,8 @@
+a, a:visited, a:hover, a:active {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
 .box {
     display: inline-flex;
     width: 90px;
@@ -9,7 +14,6 @@
 }
 
 .box a {
-    text-decoration: none;
     color: #222222;
     width: 100%;
     text-align: center;

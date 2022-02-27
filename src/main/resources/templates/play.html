@@ -21,7 +21,7 @@
                 <div th:id="l+${y}" class="box border m-1" th:each="y:${#numbers.sequence(1, length, 1)}" th:data_id="${y}"></div>
             </div>
 
-            <div id="notification"></div>
+            <a th:href="${length}"><div id="notification" class="p-4 m-4"></div></a>
         </div>
 
         <script th:inline="javascript">
@@ -29,10 +29,11 @@
                 var words = [[${words}]];
                 var wordLetters = [[${word}]].split("");
                 var attempts = [];
-                var finished = false;
+                var complete = false;
+                var failed = false;
 
                 function submitAttempt() {
-                    if(attempts.length > 4 || finished) {
+                    if(complete || failed) {
                         return;
                     }
 
@@ -44,20 +45,29 @@
                     }
 
                     attempts.push(attempt);
+
                     var index = attempts.length-1;
                     var letters = attempts[index].split("")
                     var correctPosition = 0;
                     for(var i = 1; i < letters.length+1; i++) {
                         $("#a"+(index+1)+" #l"+i).text(letters[i-1])
                         if(letters[i-1] == wordLetters[i-1]) {
-                            $("#a"+(index+1)+" #l"+i).css('background', '#00ff00');
+                            $("#a"+(index+1)+" #l"+i).css('background', '#4CBB17');
                             correctPosition++;
                         } else if(wordLetters.includes(letters[i-1])) {
                             $("#a"+(index+1)+" #l"+i).css('background', '#FFBF00');
                         }
                     }
+
                     if(correctPosition == wordLetters.length) {
-                        finished = true;
+                        complete = true;
+                        $("#notification").text('gg go next').css('background', '#4CBB17');
+                        return;
+                    }
+
+                    if(attempts.length > 4) {
+                        $("#notification").text('yikes').css('background', '#8F1C2A');
+                        failed = true;
                     }
                 }
 

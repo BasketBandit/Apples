@@ -5,17 +5,14 @@ $(document).ready(function() {
     var failed = false;
 
     function submitAttempt() {
-        if(complete || failed) {
-            return;
-        }
-
         var attempt = $(".in").val().toUpperCase();
 
         // validates an attempt for length and if it is a dictionary word
-        if(attempt.length < wordLetters.length || !words.includes(attempt)) {
+        if(complete || attempt.length < wordLetters.length || !words.includes(attempt)) {
             return;
         }
 
+        $(".in").val(""); // clears the old attempt
         attempts.push(attempt);
 
         var index = attempts.length-1;
@@ -42,11 +39,11 @@ $(document).ready(function() {
         }
 
         if(attempts.length > 4) {
+            complete = true;
             $("#inputGroup").html("<a href='" + word.length + "'><div id='notification' class='p-4 m-4'>Yikes... it was " + word + "</div></a>").removeClass("input-group").css('background', '#8F1C2A');
             if(word.length > 3) {
                 $("#inputGroup").append("<a href='" + (word.length-1) + "'><div id='difficulty' class='p-2'>im sussy 😭</div></a>");
             }
-            failed = true;
         }
     }
 

@@ -10,7 +10,7 @@
         </div>
 
         <div class="container text-center mt-3">
-            <div class="input-group mb-3">
+            <div id="inputGroup" class="input-group mb-3">
                 <input type="text" class="in form-control" th:maxlength="${length}" th:minlength="${length}" onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)">
                 <div class="input-group-append">
                     <button id="submit" class="btn btn-outline-secondary" type="button">Submit</button>
@@ -20,13 +20,11 @@
             <div th:id="a+${x}" th:each="x:${#numbers.sequence(1, 5, 1)}" th:data_id="${x}">
                 <div th:id="l+${y}" class="box border m-1" th:each="y:${#numbers.sequence(1, length, 1)}" th:data_id="${y}"></div>
             </div>
-
-            <a th:href="${length}"><div id="notification" class="p-4 m-4"></div></a>
         </div>
 
         <script th:inline="javascript">
             var words = [[${words}]];
-            var wordLetters = [[${word}]].split("");
+            var word = [[${word}]];
         </script>
         <script th:src="|/js/script.js|"></script>
     </body>

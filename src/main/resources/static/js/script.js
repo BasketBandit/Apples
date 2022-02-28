@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    var wordLetters = word.split("");
     var attempts = [];
     var complete = false;
     var failed = false;
@@ -32,12 +33,19 @@ $(document).ready(function() {
 
         if(correctPosition == wordLetters.length) {
             complete = true;
-            $("#notification").text('gg go next').css('background', '#4CBB17');
+            $("#inputGroup").html("<a href='" + word.length + "'><div id='notification' class='p-4 m-4'>gg go next</div></a>").removeClass("input-group").css('background', '#4CBB17');
+            if(word.length < 15) {
+                $("#inputGroup").append("<a href='" + (word.length+1) + "'><div id='difficulty' class='p-2'>harder 😩</div></a>");
+            }
+            $("#notification");
             return;
         }
 
         if(attempts.length > 4) {
-            $("#notification").text('yikes').css('background', '#8F1C2A');
+            $("#inputGroup").html("<a href='" + word.length + "'><div id='notification' class='p-4 m-4'>Yikes... it was " + word + "</div></a>").removeClass("input-group").css('background', '#8F1C2A');
+            if(word.length > 3) {
+                $("#inputGroup").append("<a href='" + (word.length-1) + "'><div id='difficulty' class='p-2'>im sussy 😭</div></a>");
+            }
             failed = true;
         }
     }

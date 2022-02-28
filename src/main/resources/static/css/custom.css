@@ -27,3 +27,18 @@ a, a:visited, a:hover, a:active {
 #submit {
     height: 86px;
 }
+
+#inputGroup {
+    border-radius: 10px;
+}
+
+#notification {
+    border-radius: 0px 0px 10px 10px;
+    margin-bottom: 0.5rem !important;
+}
+
+#difficulty {
+    background: #888888;
+    border-radius: 0px 0px 10px 10px;
+    margin-bottom: 0.5rem !important;
+}

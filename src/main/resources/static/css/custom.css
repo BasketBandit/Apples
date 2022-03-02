@@ -4,7 +4,15 @@ a, a:visited, a:hover, a:active {
 }
 
 .nav {
-    color: #222222 !important;
+    color: #ffffff !important;
+}
+
+.minion-top {
+    background: #FFD55E;
+}
+
+.minion-bottom {
+    background: #6F8FAF;
 }
 
 .box {

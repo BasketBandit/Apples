@@ -7,8 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -23,7 +23,7 @@ public class WordsApplication {
 
 	public WordsApplication() throws IOException {
 		log.info("Parsing words from /static/data/2019scrabble3plus.txt");
-		new BufferedReader(new FileReader(new ClassPathResource("static/data/2019scrabble3plus.txt").getFile())).lines().forEach(word -> {
+		new BufferedReader(new InputStreamReader(new ClassPathResource("static/data/2019scrabble3plus.txt").getInputStream())).lines().forEach(word -> {
 			words.computeIfAbsent(word.length(), k -> new ArrayList<>()).add(word);
 		});
 		log.info("Found words of length " + words.keySet());

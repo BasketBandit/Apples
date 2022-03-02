@@ -17,8 +17,8 @@
                 </div>
             </div>
 
-            <div th:id="a+${x}" th:each="x:${#numbers.sequence(1, 5, 1)}" th:data_id="${x}">
-                <div th:id="l+${y}" class="box border m-1" th:each="y:${#numbers.sequence(1, length, 1)}" th:data_id="${y}"></div>
+            <div th:id="a+${x}" th:each="x:${#numbers.sequence(0, 4, 1)}" th:data_id="${x}">
+                <div th:id="l+${y}" class="box border m-1" th:each="y:${#numbers.sequence(0, length-1, 1)}" th:data_id="${y}"></div>
             </div>
         </div>
 

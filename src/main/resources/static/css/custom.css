@@ -3,6 +3,10 @@ a, a:visited, a:hover, a:active {
     color: #FFFFFF;
 }
 
+.nav {
+    color: #222222 !important;
+}
+
 .box {
     display: inline-flex;
     width: 90px;

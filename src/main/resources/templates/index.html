@@ -5,9 +5,9 @@
         <div th:replace="banner"></div>
         <div class="container mt-2">
             <h2 class="btn btn-lg btn-success w-100">How many letters do you want in the word?</h2>
-            <div class="box border m-2" th:each="letterLength : ${letters}">
-                <a th:href="${letterLength}" th:text="${letterLength}"></a>
-            </div>
+            <a class="box border m-n1" th:href="${letterLength}" th:each="letterLength : ${letters}">
+                <div th:text="${letterLength}"></div>
+            </a>
         </div>
     </body>
 </html>

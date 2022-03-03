@@ -1,3 +1,12 @@
+html, body {
+    padding 0px;
+    margin 0px;
+}
+
+.m-n1 {
+    margin: 0.125rem !important;
+}
+
 a, a:visited, a:hover, a:active {
     text-decoration: none;
     color: #FFFFFF;
@@ -7,37 +16,41 @@ a, a:visited, a:hover, a:active {
     color: #ffffff !important;
 }
 
-.minion-top {
-    background: #FFD55E;
+.minion-top, .kinda {
+    background: #FFD55E !important;
 }
 
 .minion-bottom {
-    background: #6F8FAF;
+    background: #6F8FAF !important;
+}
+
+.correct {
+    background: #4CBB17 !important;
+}
+
+.wrong {
+    background: #8F1C2A !important;
 }
 
 .box, .box a {
-    display: inline-block;
-    width: 90px;
-    height: 90px;
+    display: inline-flex;
+    width: 80px;
+    height: 80px;
     background: #eeeeee;
     text-align: center;
     justify-content: center;
     vertical-align: middle;
-    line-height: 165%;
-    font-size: 36pt;
-}
-
-.box a {
-    color: #222222;
-    width: 100%;
+    font-size: 2.75em;
+    line-height: 1.75;
+    color: #222222 !important;
 }
 
 .in {
-    font-size: 36pt;
+    font-size: 2.75em;
 }
 
 #submit {
-    height: 86px;
+    height: 80px;
 }
 
 #inputGroup {

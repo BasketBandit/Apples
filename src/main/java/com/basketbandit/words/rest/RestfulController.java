@@ -34,4 +34,10 @@ public class RestfulController {
         modelAndView.addObject("length", type);
         return modelAndView;
     }
+
+    @GetMapping("/words/{x}")
+    public ArrayList<String> words(@PathVariable String x) {
+        int type = Sanitiser.isNumeric(x) ? Integer.parseInt(x) : 5;
+        return words.getOrDefault(type, words.get(5));
+    }
 }

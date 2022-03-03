@@ -1,6 +1,7 @@
 package com.basketbandit.words.rest;
 
 import com.basketbandit.words.WordsApplication;
+import com.basketbandit.words.util.Sanitiser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,9 +24,10 @@ public class RestfulController {
         return modelAndView;
     }
 
-    @GetMapping("/{type}")
-    public ModelAndView play(@PathVariable int type) {
-        ArrayList<String> list = words.get(type);
+    @GetMapping("/game/{x}")
+    public ModelAndView play(@PathVariable String x) {
+        int type = Sanitiser.isNumeric(x) ? Integer.parseInt(x) : 5;
+        ArrayList<String> list = words.getOrDefault(type, words.get(5)); // this should ensure that all possible inputs will resolve
         ModelAndView modelAndView = new ModelAndView("play");
         modelAndView.addObject("words", list);
         modelAndView.addObject("word", list.get(new Random(System.currentTimeMillis()).nextInt(list.size()-1)));

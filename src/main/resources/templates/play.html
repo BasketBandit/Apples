@@ -5,7 +5,7 @@
         <div th:replace="banner"></div>
         <div class="container text-center mt-3">
             <div id="inputGroup" class="input-group mb-3">
-                <input type="text" class="in form-control" th:maxlength="${length}" th:minlength="${length}" onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)">
+                <input type="text" class="in form-control" th:maxlength="${length}" th:minlength="${length}">
                 <div class="input-group-append">
                     <button id="submit" class="btn btn-outline-secondary" type="button">Submit</button>
                 </div>

@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="head"></head>
+    <body>
+        <div th:replace="banner"></div>
+        <div class="container mt-2">
+            <h2 class="btn btn-lg btn-success w-100">How many letters do you want in the word?</h2>
+            <a class="box border m-n1" th:href="${'/game/words/' + letterLength}" th:each="letterLength : ${letters}">
+                <div th:text="${letterLength}"></div>
+            </a>
+        </div>
+    </body>
+</html>

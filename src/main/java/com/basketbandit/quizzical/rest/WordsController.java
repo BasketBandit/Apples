@@ -1,7 +1,7 @@
-package com.basketbandit.words.rest;
+package com.basketbandit.quizzical.rest;
 
-import com.basketbandit.words.WordsApplication;
-import com.basketbandit.words.util.Sanitiser;
+import com.basketbandit.quizzical.Application;
+import com.basketbandit.quizzical.util.Sanitiser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,14 +13,9 @@ import java.util.HashMap;
 import java.util.Random;
 
 @org.springframework.web.bind.annotation.RestController
-public class RestfulController {
-    private static final HashMap<Integer, ArrayList<String>> words = WordsApplication.words;
-    private static final Logger log = LoggerFactory.getLogger(RestfulController.class);
-
-    @GetMapping("/")
-    public ModelAndView root() {
-        return new ModelAndView("index");
-    }
+public class WordsController {
+    private static final Logger log = LoggerFactory.getLogger(WordsController.class);
+    private static final HashMap<Integer, ArrayList<String>> words = Application.words;
 
     @GetMapping("/game/words/")
     public ModelAndView words() {

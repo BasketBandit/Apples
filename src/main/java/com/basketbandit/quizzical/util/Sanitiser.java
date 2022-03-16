@@ -1,4 +1,4 @@
-package com.basketbandit.words.util;
+package com.basketbandit.quizzical.util;
 
 import java.util.Arrays;
 

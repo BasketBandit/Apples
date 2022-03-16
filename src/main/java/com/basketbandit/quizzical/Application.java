@@ -1,4 +1,4 @@
-package com.basketbandit.words;
+package com.basketbandit.quizzical;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,15 +13,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 @SpringBootApplication
-public class WordsApplication {
-	private static final Logger log = LoggerFactory.getLogger(WordsApplication.class);
+public class Application {
+	private static final Logger log = LoggerFactory.getLogger(Application.class);
 	public static final HashMap<Integer, ArrayList<String>> words = new HashMap<>();
 
 	public static void main(String[] args) {
-		SpringApplication.run(WordsApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
-	public WordsApplication() throws IOException {
+	public Application() throws IOException {
 		log.info("Parsing words from /static/data/2019scrabble3plus.txt");
 		new BufferedReader(new InputStreamReader(new ClassPathResource("static/data/2019scrabble3plus.txt").getInputStream())).lines().forEach(word -> {
 			words.computeIfAbsent(word.length(), k -> new ArrayList<>()).add(word);

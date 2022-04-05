@@ -10,8 +10,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.io.ClassPathResource;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -20,7 +22,7 @@ import java.util.HashMap;
 @SpringBootApplication
 public class Application {
 	private static final Logger log = LoggerFactory.getLogger(Application.class);
-	public static final BufferedImageHex image = new BufferedImageHex(250,141, BufferedImage.TYPE_INT_ARGB);
+	public static BufferedImageHex image = new BufferedImageHex(250,141, BufferedImage.TYPE_INT_ARGB);
 	public static final HashMap<Integer, ArrayList<String>> words = new HashMap<>();
 
 	public static void main(String[] args) {
@@ -33,6 +35,13 @@ public class Application {
 			words.computeIfAbsent(word.length(), k -> new ArrayList<>()).add(word);
 		});
 		log.info("Found words of length " + words.keySet());
+
+		try {
+			BufferedImage tmp = ImageIO.read(new File("background.png"));
+			image.setData(tmp.getRaster());
+		} catch(Exception e) {
+			log.warn("Failed to load existing image, reason: {}", e.getMessage());
+		}
 
 		ScheduleHandler.registerJob(new UpdateJob(new UpdateImageTask()));
 	}

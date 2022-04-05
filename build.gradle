@@ -6,16 +6,16 @@ plugins {
 
 group = 'com.basketbandit'
 version = '0.1.0'
-sourceCompatibility = '17'
+sourceCompatibility = '16'
 
 repositories {
 	mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

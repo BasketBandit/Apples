@@ -13,5 +13,4 @@ public class GenericController {
     public ModelAndView root() {
         return new ModelAndView("index");
     }
-
 }

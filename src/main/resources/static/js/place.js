@@ -6,14 +6,14 @@ $(document).ready(function() {
         ws.onmessage = function(data){
             update(data.data);
         }
-        console.log("Connected");
+        console.log("Connected to the server...");
     }
 
     function disconnect() {
         if(ws != null) {
             ws.close();
         }
-        console.log("Disconnected");
+        console.log("Disconnected from the server...");
     }
 
     function send() {
@@ -25,7 +25,6 @@ $(document).ready(function() {
             data = data.substring(6, data.length);
             var segment = data.split(',');
             $('.pixel[data-x='+segment[0]+'][data-y='+segment[1]+']').css("backgroundColor","#"+segment[2])
-            console.log(segment);
             return;
         }
     }

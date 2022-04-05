@@ -7,8 +7,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.io.ClassPathResource;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -30,5 +32,11 @@ public class Application {
 			words.computeIfAbsent(word.length(), k -> new ArrayList<>()).add(word);
 		});
 		log.info("Found words of length " + words.keySet());
+
+		try {
+			ImageIO.write(image, "png", new File( System.currentTimeMillis() + "-discord_place.png"));
+		} catch(Exception e) {
+			log.error(e.getMessage());
+		}
 	}
 }

@@ -12,23 +12,29 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 
 @Component
 public class SocketHandler extends TextWebSocketHandler {
     private static final Logger log = LoggerFactory.getLogger(SocketHandler.class);
     private static final ArrayList<WebSocketSession> clients = new ArrayList<>();
+    private static final HashMap<String, Color> usedColours = new HashMap<>();
 
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) {
         try {
             if(message.getPayload().startsWith("place:")) {
                 String[] data = message.getPayload().substring(6).split(",");
-                if(data.length < 3 || !Sanitiser.isNumeric(data[0]) || !Sanitiser.isNumeric(data[1]) || !Sanitiser.isHexadecimal(data[2])) {
+
+                // make sure data is valid (kind of)
+                if(data.length < 3 || !Sanitiser.isHexadecimal(data[0] + data[1] + data[2])) {
                     return;
                 }
-                PlaceController.image.setRGB(Integer.parseInt(data[0]), Integer.parseInt(data[1]), new Color((int) Long.parseLong(data[2], 16)).getRGB());
-                System.out.println(Arrays.toString(data));
+
+                // update BufferedImage
+                PlaceController.image.setRGB(Integer.parseInt(data[0]), Integer.parseInt(data[1]), usedColours.computeIfAbsent(data[2], k -> new Color((int) Long.parseLong(data[2], 16))).getRGB());
+
+                // update all connected clients
                 for(WebSocketSession client : clients) {
                     client.sendMessage(message);
                 }

@@ -1,5 +1,8 @@
 package com.basketbandit.quizzical;
 
+import com.basketbandit.quizzical.scheduler.ScheduleHandler;
+import com.basketbandit.quizzical.scheduler.jobs.UpdateJob;
+import com.basketbandit.quizzical.scheduler.tasks.UpdateImageTask;
 import com.basketbandit.quizzical.util.BufferedImageHex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,10 +10,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.io.ClassPathResource;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -33,10 +34,6 @@ public class Application {
 		});
 		log.info("Found words of length " + words.keySet());
 
-		try {
-			ImageIO.write(image, "png", new File( System.currentTimeMillis() + "-discord_place.png"));
-		} catch(Exception e) {
-			log.error(e.getMessage());
-		}
+		ScheduleHandler.registerJob(new UpdateJob(new UpdateImageTask()));
 	}
 }

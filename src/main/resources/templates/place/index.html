@@ -5,13 +5,30 @@
         <div th:replace="banner"></div>
         <div class="container text-center mt-3">
             <div id="colours" class="input-group mb-3">
-                <a class="box border colourSelector" data-hex="ff0000" style="background-color:#ff0000"></a>
-                <a class="box border colourSelector" data-hex="00ff00" style="background-color:#00ff00"></a>
-                <a class="box border colourSelector" data-hex="0000ff" style="background-color:#0000ff"></a>
-                <a class="box border colourSelector" data-hex="ffffff" style="background-color:#ffffff"></a>
-                <a class="box border colourSelector" data-hex="000000" style="background-color:#000000"></a>
+                <a class="cbox border colourSelector" data-hex="B21F35" style="background-color:#B21F35"></a>
+                <a class="cbox border colourSelector" data-hex="D82735" style="background-color:#D82735"></a>
+                <a class="cbox border colourSelector" data-hex="FF7435" style="background-color:#FF7435"></a>
+                <a class="cbox border colourSelector" data-hex="FFA135" style="background-color:#FFA135"></a>
+                <a class="cbox border colourSelector" data-hex="FFCB35" style="background-color:#FFCB35"></a>
+                <a class="cbox border colourSelector" data-hex="FFF735" style="background-color:#FFF735"></a>
+                <a class="cbox border colourSelector" data-hex="00753A" style="background-color:#00753A"></a>
+                <a class="cbox border colourSelector" data-hex="009E47" style="background-color:#009E47"></a>
+                <a class="cbox border colourSelector" data-hex="16DD36" style="background-color:#16DD36"></a>
+                <a class="cbox border colourSelector" data-hex="0052A5" style="background-color:#0052A5"></a>
+                <a class="cbox border colourSelector" data-hex="0079E7" style="background-color:#0079E7"></a>
+                <a class="cbox border colourSelector" data-hex="06A9FC" style="background-color:#06A9FC"></a>
+                <a class="cbox border colourSelector" data-hex="681E7E" style="background-color:#681E7E"></a>
+                <a class="cbox border colourSelector" data-hex="7D3CB5" style="background-color:#7D3CB5"></a>
+                <a class="cbox border colourSelector" data-hex="BD7AF6" style="background-color:#BD7AF6"></a>
+                <a class="cbox border colourSelector" data-hex="BD7AF6" style="background-color:#000000"></a>
+                <a class="cbox border colourSelector" data-hex="BD7AF6" style="background-color:#222222"></a>
+                <a class="cbox border colourSelector" data-hex="BD7AF6" style="background-color:#444444"></a>
+                <a class="cbox border colourSelector" data-hex="BD7AF6" style="background-color:#FFFFFF"></a>
+                <a class="cbox border colourSelector" data-hex="BD7AF6" style="background-color:#DDDDDD"></a>
+                <a class="cbox border colourSelector" data-hex="BD7AF6" style="background-color:#BBBBBB"></a>
             </div>
         </div>
+
         <div class="pcontainer" th:each="y: ${#numbers.sequence(0, image.getHeight-1)}">
             <a class="pbox pixel" th:each="x: ${#numbers.sequence(0, image.getWidth-1)}" th:attr="data-x=${x},data-y=${y}" th:style="'background-color:' + ${image.getHex(x,y)}"></a>
         </div>

@@ -1,6 +1,6 @@
 package com.basketbandit.quizzical.socket;
 
-import com.basketbandit.quizzical.rest.PlaceController;
+import com.basketbandit.quizzical.Application;
 import com.basketbandit.quizzical.util.Sanitiser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +32,7 @@ public class SocketHandler extends TextWebSocketHandler {
                 }
 
                 // update BufferedImage
-                PlaceController.image.setRGB(Integer.parseInt(data[0]), Integer.parseInt(data[1]), usedColours.computeIfAbsent(data[2], k -> new Color((int) Long.parseLong(data[2], 16))).getRGB());
+                Application.image.setRGB(Integer.parseInt(data[0]), Integer.parseInt(data[1]), usedColours.computeIfAbsent(data[2], k -> new Color((int) Long.parseLong(data[2], 16))).getRGB());
 
                 // update all connected clients
                 for(WebSocketSession client : clients) {

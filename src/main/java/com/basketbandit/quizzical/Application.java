@@ -1,11 +1,13 @@
 package com.basketbandit.quizzical;
 
+import com.basketbandit.quizzical.util.BufferedImageHex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.io.ClassPathResource;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,6 +17,7 @@ import java.util.HashMap;
 @SpringBootApplication
 public class Application {
 	private static final Logger log = LoggerFactory.getLogger(Application.class);
+	public static final BufferedImageHex image = new BufferedImageHex(250,141, BufferedImage.TYPE_INT_ARGB);
 	public static final HashMap<Integer, ArrayList<String>> words = new HashMap<>();
 
 	public static void main(String[] args) {

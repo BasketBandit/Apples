@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class PlaceController {
     private static final Logger log = LoggerFactory.getLogger(PlaceController.class);
 
-
     @GetMapping("/place/")
     public ModelAndView place() {
         ModelAndView modelAndView = new ModelAndView("./place/index");

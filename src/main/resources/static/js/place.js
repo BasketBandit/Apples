@@ -2,7 +2,7 @@ $(document).ready(function() {
     var selectedColour = "000000";
 
     function connect() {
-        ws = new WebSocket('ws://3.9.0.140:' + location.port +'/place/events');
+        ws = new WebSocket('ws://localhost:' + location.port +'/place/events'); // 3.9.0.140
         ws.onmessage = function(data){
             update(data.data);
         }

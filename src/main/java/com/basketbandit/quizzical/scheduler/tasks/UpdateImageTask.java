@@ -14,7 +14,7 @@ public class UpdateImageTask implements Task {
     @Override
     public void run() {
         try {
-            ImageIO.write(Application.image, "png", new File("background"));
+            ImageIO.write(Application.image, "png", new File("background.png"));
         } catch(Exception e) {
             //
         }

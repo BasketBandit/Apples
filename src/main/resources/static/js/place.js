@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var selectedColour = "000000";
+    var selectedColour = "ffffff";
 
     function connect() {
         ws = new WebSocket('ws://localhost:' + location.port +'/place/events'); // 3.9.0.140

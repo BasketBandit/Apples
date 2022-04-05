@@ -67,6 +67,10 @@ a, a:visited, a:hover, a:active {
 /*********************************************/
 /*********************************************/
 
+.border-primary {
+    border-width: 3px!important;
+}
+
 .cbox, .cbox a {
     display: inline-flex;
     width: 40px;
@@ -79,6 +83,7 @@ a, a:visited, a:hover, a:active {
     line-height: 1.75;
     color: #222222 !important;
     cursor: pointer;
+    margin-right: 0.25rem;
 }
 
 .pcontainer {

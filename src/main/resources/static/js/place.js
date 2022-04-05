@@ -35,6 +35,8 @@ $(document).ready(function() {
 
     $('.colourSelector').on('click', function() {
         selectedColour = $(this).data('hex');
+        $('a').removeClass('border-primary');
+        $(this).addClass('border-primary');
     })
 
     connect();

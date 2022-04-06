@@ -52,7 +52,7 @@
                 var selectedColour = "ffffff";
 
                 function connect() {
-                    ws = new WebSocket('ws://3.9.0.140:' + location.port +'/place/events'); // 3.9.0.140
+                    ws = new WebSocket('ws://localhost:' + location.port +'/place/events');
                     ws.onmessage = function(data){
                         update(data.data);
                     }
@@ -81,15 +81,15 @@
 
                 canvas.addEventListener('mousedown', (e) => {
                     var rect = canvas.getBoundingClientRect();
-                    var x = Math.floor((e.clientX - rect.left) / 5);
-                    var y = Math.floor((e.clientY - rect.top) / 5);
+                    var x = Math.round(Math.floor(e.clientX - rect.left)/5);
+                    var y = Math.round(Math.floor(e.clientY - rect.top)/5);
                     ws.send("place:" + x + "," + y + "," + selectedColour);
                 });
 
                 canvas.addEventListener('mousemove', (e) => {
                     var rect = canvas.getBoundingClientRect();
-                    var x = Math.floor((e.clientX - rect.left) / 5);
-                    var y = Math.floor((e.clientY - rect.top) / 5);
+                    var x = Math.round(Math.floor(e.clientX - rect.left)/5);
+                    var y = Math.round(Math.floor(e.clientY - rect.top)/5);
                     $('#coords').text("x: "+x+", y: "+y);
                 });
 

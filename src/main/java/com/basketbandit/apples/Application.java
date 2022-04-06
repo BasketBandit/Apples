@@ -3,7 +3,7 @@ package com.basketbandit.apples;
 import com.basketbandit.apples.scheduler.ScheduleHandler;
 import com.basketbandit.apples.scheduler.jobs.UpdateJob;
 import com.basketbandit.apples.scheduler.tasks.UpdateImageTask;
-import com.basketbandit.apples.util.BufferedImageHex;
+import com.basketbandit.apples.util.BufferedImageBase64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -22,7 +22,7 @@ import java.util.HashMap;
 @SpringBootApplication
 public class Application {
 	private static final Logger log = LoggerFactory.getLogger(Application.class);
-	public static BufferedImageHex image = new BufferedImageHex(250,141, BufferedImage.TYPE_INT_ARGB);
+	public static BufferedImageBase64 image = new BufferedImageBase64(250,141, BufferedImage.TYPE_INT_ARGB);
 	public static final HashMap<Integer, ArrayList<String>> words = new HashMap<>();
 
 	public static void main(String[] args) {

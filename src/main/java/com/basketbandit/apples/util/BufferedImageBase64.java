@@ -10,8 +10,8 @@ import java.io.OutputStream;
 import java.io.UncheckedIOException;
 import java.util.Base64;
 
-public class BufferedImageHex extends BufferedImage {
-    public BufferedImageHex(int width, int height, int imageType) {
+public class BufferedImageBase64 extends BufferedImage {
+    public BufferedImageBase64(int width, int height, int imageType) {
         super(width, height, imageType);
     }
 

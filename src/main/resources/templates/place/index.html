@@ -36,6 +36,7 @@
         <div class="canvas-container text-center d-flex justify-content-center">
             <canvas id="canvas" width="250" height="141"></canvas>
         </div>
+        <div id="coords" class="text-center"></div>
 
         <script type="text/javascript" th:inline="javascript">
             $(document).ready(function() {
@@ -71,8 +72,7 @@
 
                 function update(data) {
                     if(data.startsWith("place:")) {
-                        data = data.substring(6, data.length);
-                        var segment = data.split(',');
+                        var segment = data.substring(6, data.length).split(',');
                         ctx.fillStyle = "#" + segment[2];
                         ctx.fillRect(segment[0], segment[1], 1, 1); // x, y, w, h
                         return;
@@ -85,6 +85,14 @@
                     var x = Math.floor(mouseX * canvas.width / canvas.clientWidth);
                     var y = Math.floor(mouseY * canvas.height / canvas.clientHeight);
                     ws.send("place:" + x + "," + y + "," + selectedColour);
+                });
+
+                canvas.addEventListener('mousemove', (e) => {
+                    var mouseX = e.clientX - canvas.offsetLeft;
+                    var mouseY = e.clientY - canvas.offsetTop;
+                    var x = Math.floor(mouseX * canvas.width / canvas.clientWidth);
+                    var y = Math.floor(mouseY * canvas.height / canvas.clientHeight);
+                    $('#coords').text("x: "+x+", y: "+y);
                 });
 
                 $('.colourSelector').on('click', function() {

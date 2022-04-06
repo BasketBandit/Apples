@@ -81,15 +81,15 @@
 
                 canvas.addEventListener('mousedown', (e) => {
                     var rect = canvas.getBoundingClientRect();
-                    var x = Math.round(Math.floor(e.clientX - rect.left)/5);
-                    var y = Math.round(Math.floor(e.clientY - rect.top)/5);
+                    var x = Math.floor((e.clientX - rect.left)/5);
+                    var y = Math.floor((e.clientY - rect.top)/5);
                     ws.send("place:" + x + "," + y + "," + selectedColour);
                 });
 
                 canvas.addEventListener('mousemove', (e) => {
                     var rect = canvas.getBoundingClientRect();
-                    var x = Math.round(Math.floor(e.clientX - rect.left)/5);
-                    var y = Math.round(Math.floor(e.clientY - rect.top)/5);
+                    var x = Math.floor((e.clientX - rect.left)/5);
+                    var y = Math.floor((e.clientY - rect.top)/5);
                     $('#coords').text("x: "+x+", y: "+y);
                 });
 

@@ -74,11 +74,10 @@ canvas {
     image-rendering: -webkit-crisp-edges;
     image-rendering: pixelated;
     image-rendering: crisp-edges;
-    overflow:auto;
 }
 
 .canvas-container {
-    width: 1249px;
+    width: 1252px;
     height: 707px;
     margin: auto;
     border: solid;
@@ -103,19 +102,4 @@ canvas {
     color: #222222 !important;
     cursor: pointer;
     margin-right: 0.175rem;
-}
-
-.pcontainer {
-    text-align: center;
-    height: 5px;
-    padding: 0px;
-    margin: 0px;
-}
-
-.pbox, .pbox a {
-    display: inline-flex;
-    justify-content: center;
-    vertical-align: top;
-    width: 5px;
-    height: 5px;
 }

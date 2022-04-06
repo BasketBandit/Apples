@@ -1,4 +1,4 @@
-package com.basketbandit.quizzical.util;
+package com.basketbandit.apples.util;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;

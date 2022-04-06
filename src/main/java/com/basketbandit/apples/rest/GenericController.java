@@ -1,4 +1,4 @@
-package com.basketbandit.quizzical.rest;
+package com.basketbandit.apples.rest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

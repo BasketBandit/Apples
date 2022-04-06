@@ -1,4 +1,4 @@
-package com.basketbandit.quizzical.scheduler;
+package com.basketbandit.apples.scheduler;
 
 import java.util.HashSet;
 import java.util.Set;

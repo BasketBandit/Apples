@@ -1,9 +1,9 @@
-package com.basketbandit.quizzical;
+package com.basketbandit.apples;
 
-import com.basketbandit.quizzical.scheduler.ScheduleHandler;
-import com.basketbandit.quizzical.scheduler.jobs.UpdateJob;
-import com.basketbandit.quizzical.scheduler.tasks.UpdateImageTask;
-import com.basketbandit.quizzical.util.BufferedImageHex;
+import com.basketbandit.apples.scheduler.ScheduleHandler;
+import com.basketbandit.apples.scheduler.jobs.UpdateJob;
+import com.basketbandit.apples.scheduler.tasks.UpdateImageTask;
+import com.basketbandit.apples.util.BufferedImageHex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;

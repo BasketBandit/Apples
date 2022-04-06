@@ -1,6 +1,6 @@
-package com.basketbandit.quizzical.util;
+package com.basketbandit.apples.util;
 
-import com.basketbandit.quizzical.Application;
+import com.basketbandit.apples.Application;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

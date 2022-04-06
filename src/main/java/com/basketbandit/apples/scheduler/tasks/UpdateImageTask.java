@@ -1,7 +1,7 @@
-package com.basketbandit.quizzical.scheduler.tasks;
+package com.basketbandit.apples.scheduler.tasks;
 
-import com.basketbandit.quizzical.Application;
-import com.basketbandit.quizzical.scheduler.Task;
+import com.basketbandit.apples.Application;
+import com.basketbandit.apples.scheduler.Task;
 
 import javax.imageio.ImageIO;
 import java.io.File;

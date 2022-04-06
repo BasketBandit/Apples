@@ -1,7 +1,7 @@
-package com.basketbandit.quizzical.scheduler.jobs;
+package com.basketbandit.apples.scheduler.jobs;
 
-import com.basketbandit.quizzical.scheduler.Job;
-import com.basketbandit.quizzical.scheduler.tasks.UpdateImageTask;
+import com.basketbandit.apples.scheduler.Job;
+import com.basketbandit.apples.scheduler.tasks.UpdateImageTask;
 
 import java.util.concurrent.TimeUnit;
 

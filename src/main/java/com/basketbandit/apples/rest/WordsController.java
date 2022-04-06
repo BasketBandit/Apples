@@ -1,7 +1,7 @@
-package com.basketbandit.quizzical.rest;
+package com.basketbandit.apples.rest;
 
-import com.basketbandit.quizzical.Application;
-import com.basketbandit.quizzical.util.Sanitiser;
+import com.basketbandit.apples.Application;
+import com.basketbandit.apples.util.Sanitiser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;

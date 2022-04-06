@@ -67,6 +67,25 @@ a, a:visited, a:hover, a:active {
 /*********************************************/
 /*********************************************/
 
+canvas {
+    width: 1250px;
+    height: 705px;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    overflow:auto;
+}
+
+.canvas-container {
+    width: 1249px;
+    height: 707px;
+    margin: auto;
+    border: solid;
+    border-color: #222222;
+    border-width: 1px!important;
+}
+
 .border-primary {
     border-width: 3px!important;
 }

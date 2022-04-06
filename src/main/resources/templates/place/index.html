@@ -4,7 +4,7 @@
     <body>
         <div th:replace="banner"></div>
         <div class="container mt-1">
-            <div id="colours" class="input-group mb-1">
+            <div id="colours" class="input-group justify-content-center mb-1">
                 <a class="cbox border colourSelector" data-hex="B21F35" style="background-color:#B21F35"></a>
                 <a class="cbox border colourSelector" data-hex="D82735" style="background-color:#D82735"></a>
                 <a class="cbox border colourSelector" data-hex="FF7435" style="background-color:#FF7435"></a>
@@ -31,14 +31,70 @@
                 <a class="cbox border colourSelector" data-hex="DDDDDD" style="background-color:#DDDDDD"></a>
                 <a class="cbox border colourSelector" data-hex="BBBBBB" style="background-color:#BBBBBB"></a>
             </div>
-
-            <a class="btn btn-primary mb-1" href="/place/current" target="_blank">Save Image</a>
         </div>
 
-        <div class="pcontainer" th:each="y: ${#numbers.sequence(0, image.getHeight-1)}">
-            <a class="pbox pixel" th:each="x: ${#numbers.sequence(0, image.getWidth-1)}" th:attr="data-x=${x},data-y=${y}" th:style="'background-color:' + ${image.getHex(x,y)}"></a>
+        <div class="canvas-container text-center d-flex justify-content-center">
+            <canvas id="canvas" width="250" height="141"></canvas>
         </div>
 
-        <script th:src="|/js/place.js|"></script>
+        <script type="text/javascript" th:inline="javascript">
+            $(document).ready(function() {
+                const canvas = document.querySelector('canvas');
+                const ctx = canvas.getContext('2d', {antialias: false});
+
+                var image = new Image();
+                image.onload = function() {
+                    ctx.drawImage(image, 0, 0);
+                };
+                image.src = [[${"data:image/png;base64,"+image}]];
+
+                var selectedColour = "ffffff";
+
+                function connect() {
+                    ws = new WebSocket('ws://localhost:' + location.port +'/place/events'); //3.9.0.140
+                    ws.onmessage = function(data){
+                        update(data.data);
+                    }
+                    console.log("Connected to the server...");
+                }
+
+                function disconnect() {
+                    if(ws != null) {
+                        ws.close();
+                    }
+                    console.log("Disconnected from the server...");
+                }
+
+                function send() {
+                    ws.send();
+                }
+
+                function update(data) {
+                    if(data.startsWith("place:")) {
+                        data = data.substring(6, data.length);
+                        var segment = data.split(',');
+                        ctx.fillStyle = "#" + segment[2];
+                        ctx.fillRect(segment[0], segment[1], 1, 1); // x, y, w, h
+                        return;
+                    }
+                }
+
+                canvas.addEventListener('mousedown', (e) => {
+                    var mouseX = e.clientX - canvas.offsetLeft;
+                    var mouseY = e.clientY - canvas.offsetTop;
+                    var x = Math.floor(mouseX * canvas.width / canvas.clientWidth);
+                    var y = Math.floor(mouseY * canvas.height / canvas.clientHeight);
+                    ws.send("place:" + x + "," + y + "," + selectedColour);
+                });
+
+                $('.colourSelector').on('click', function() {
+                    selectedColour = $(this).data('hex');
+                    $('a').removeClass('border-primary');
+                    $(this).addClass('border-primary');
+                })
+
+                connect();
+            })
+        </script>
     </body>
 </html>

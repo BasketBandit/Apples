@@ -37,7 +37,7 @@ public class Application {
 		log.info("Found words of length " + words.keySet());
 
 		try {
-			BufferedImage tmp = ImageIO.read(new File("background.png"));
+			BufferedImage tmp = ImageIO.read(new File("canvas.png"));
 			image.setData(tmp.getRaster());
 		} catch(Exception e) {
 			log.warn("Failed to load existing image, reason: {}", e.getMessage());

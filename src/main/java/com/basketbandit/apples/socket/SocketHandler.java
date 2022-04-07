@@ -28,6 +28,11 @@ public class SocketHandler extends TextWebSocketHandler {
                 return;
             }
 
+            if(message.getPayload().equals("ping")) {
+                session.sendMessage(new TextMessage("pong"));
+                return;
+            }
+
             if(message.getPayload().equals("retrieve")) {
                 session.sendMessage(new TextMessage("retrieve:data:image/png;base64," + Application.image.getAsBase64Png()));
                 return;

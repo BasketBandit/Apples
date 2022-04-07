@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    var ping;
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d', {antialias: false});
     var selectedColour = "ffffff";
@@ -28,6 +29,7 @@ $(document).ready(function() {
 
         ws.addEventListener('open', function(event) {
             console.log("Connected to the server.");
+            ping = setInterval(ping(), 30000); // ping the server every 30 seconds to keep the connection alive
             send("retrieve");
         });
 
@@ -38,6 +40,7 @@ $(document).ready(function() {
 
         ws.addEventListener('close', function(event) {
             console.log("Connection closed, attempting to reconnect...");
+            clearInterval(ping); // clear the ping interval to stop pinging the server after it has closed
             var disconnected = new Image();
             disconnected.onload = function() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -58,6 +61,10 @@ $(document).ready(function() {
         if(ws.readyState == 1) {
             ws.send(data);
         }
+    }
+
+    function ping() {
+        send("ping");
     }
 
     function update(data) {

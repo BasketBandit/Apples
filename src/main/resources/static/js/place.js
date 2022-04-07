@@ -29,7 +29,7 @@ $(document).ready(function() {
 
         ws.addEventListener('open', function(event) {
             console.log("Connected to the server.");
-            ping = setInterval(ping(), 30000); // ping the server every 30 seconds to keep the connection alive
+            ping = setInterval(function(){ send("ping"); }, 30000); // ping the server every 30 seconds to keep the connection alive
             send("retrieve");
         });
 
@@ -54,17 +54,13 @@ $(document).ready(function() {
     function send(data) {
         if(ws.readyState == 0) {
             setTimeout(() => {
-              send(data);
+                send(data);
             }, 10);
             return;
         }
         if(ws.readyState == 1) {
             ws.send(data);
         }
-    }
-
-    function ping() {
-        send("ping");
     }
 
     function update(data) {

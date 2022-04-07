@@ -23,6 +23,16 @@ public class SocketHandler extends TextWebSocketHandler {
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) {
         try {
+            if(!session.isOpen()) {
+                session.close();
+                return;
+            }
+
+            if(message.getPayload().equals("retrieve")) {
+                session.sendMessage(new TextMessage("retrieve:data:image/png;base64," + Application.image.getAsBase64Png()));
+                return;
+            }
+
             if(message.getPayload().startsWith("place:")) {
                 String[] data = message.getPayload().substring(6).split(",");
 
@@ -36,7 +46,9 @@ public class SocketHandler extends TextWebSocketHandler {
 
                 // update all connected clients
                 for(WebSocketSession client : clients) {
-                    client.sendMessage(message);
+                    if(client.isOpen()) {
+                        client.sendMessage(message);
+                    }
                 }
             }
         } catch(Exception e) {

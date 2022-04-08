@@ -1,7 +1,12 @@
 $(document).ready(function() {
     var ping;
-    const canvas = document.querySelector('canvas');
-    const ctx = canvas.getContext('2d', {antialias: false});
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d', {antialias: false});
+    canvas.width = 250;
+    canvas.height = 141;
+    canvas.style.width = canvas.width * 5; // scales x axis by 5
+    canvas.style.height = canvas.height * 5; // scales y axis by 5;
+
     var selectedColour = "ffffff";
 
     function connect() {

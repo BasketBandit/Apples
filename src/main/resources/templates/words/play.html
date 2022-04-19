@@ -4,15 +4,15 @@
     <body>
         <div th:replace="banner"></div>
         <div class="container text-center mt-3">
-            <div id="inputGroup" class="input-group mb-3">
+            <div th:id="a+${x}" class="d-flex justify-content-center" th:each="x:${#numbers.sequence(0, 4, 1)}" th:data_id="${x}">
+                <div th:id="l+${y}" class="box border m-n1" th:each="y:${#numbers.sequence(0, length-1, 1)}" th:data_id="${y}"></div>
+            </div>
+
+            <div id="inputGroup" class="input-group mt-4">
                 <input type="text" class="in form-control" th:maxlength="${length}" th:minlength="${length}">
                 <div class="input-group-append">
                     <button id="submit" class="btn btn-outline-secondary" type="button">Submit</button>
                 </div>
-            </div>
-
-            <div th:id="a+${x}" class="d-flex justify-content-center" th:each="x:${#numbers.sequence(0, 4, 1)}" th:data_id="${x}">
-                <div th:id="l+${y}" class="box border m-n1" th:each="y:${#numbers.sequence(0, length-1, 1)}" th:data_id="${y}"></div>
             </div>
         </div>
 

@@ -36,8 +36,45 @@ a, a:visited, a:hover, a:active {
     justify-content: center;
     vertical-align: middle;
     font-size: 2.75em;
-    line-height: 1.75;
+    line-height: 1.75em;
     color: #222222 !important;
+}
+
+.box-nav {
+    display: inline-flex;
+    width: 250px;
+    height: 141px;
+    background: #eeeeee;
+    justify-content: center;
+    vertical-align: middle;
+    font-size: 2.75em;
+    line-height: 2.75em;
+    color: #ffffff !important;
+}
+
+.box-nav-wordle {
+    display: inline-flex;
+    width: 25px;
+    height: 25px;
+    justify-content: center;
+    vertical-align: middle;
+    font-size: 0.45em;
+    line-height: 1.2;
+}
+
+.box-nav-wordle-title {
+    display: inline-table;
+}
+
+.box-nav-place-title {
+    width: 100%;
+    background: rgba(0,0,0,0.5);
+    padding: 0.125em;
+    text-align: center;
+}
+
+.place {
+    background-image: url("/img/place.png");
 }
 
 .in {

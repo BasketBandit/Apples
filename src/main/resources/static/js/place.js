@@ -10,7 +10,7 @@ $(document).ready(function() {
     var selectedColour = "ffffff";
 
     function connect() {
-        ws = new WebSocket('ws://localhost:' + location.port +'/place/events');  // 3.9.0.140
+        ws = new WebSocket('wss://localhost:' + location.port +'/place/events');
 
         var connecting = new Image();
         connecting.onload = function() {

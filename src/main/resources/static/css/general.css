@@ -160,6 +160,17 @@ progress[value]::-webkit-progress-bar {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
 }
 
+.play-ready {
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+    font-size: 2.4em;
+    padding: 0px!important;
+    margin: 0px!important;
+    max-height: 38px;
+    transform: translate(0px, -12px);
+}
+
 /*********************************************/
 /*********************************************/
 /*********************************************/

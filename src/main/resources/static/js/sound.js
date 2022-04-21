@@ -12,7 +12,7 @@ $(document).ready(function() {
 
     player.bind(SC.Widget.Events.READY, function() {
         player.setVolume(50);
-        $('#play-button').removeClass('btn-primary').removeClass('btn').addClass('play-ready').text("▶");
+        $('#play-button').removeClass('btn-primary').removeClass('btn').addClass('play-ready').text("▶️");
 //        setTimeout(function (){
 //            player.getSounds(function(sounds) {
 //                sounds.forEach((track) => {
@@ -29,7 +29,7 @@ $(document).ready(function() {
         $('#progress-text').text("0:" + pad(Math.floor(data.currentPosition / 1000)) + " / 0:" + pad(maxTime / 1000));
         if(data.currentPosition >= currentTime) {
             player.pause();
-            $('#play-button').text("▶");
+            $('#play-button').text("▶️");
         }
     });
 
@@ -42,7 +42,7 @@ $(document).ready(function() {
             } else {
                 player.pause();
                 progress.value = 0;
-                $('#play-button').text("▶");
+                $('#play-button').text("▶️");
             }
         });
     })

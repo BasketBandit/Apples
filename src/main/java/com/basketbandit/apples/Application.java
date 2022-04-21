@@ -40,7 +40,7 @@ public class Application {
 
 		log.info("Parsing sounds from /static/data/250soundcloud.txt");
 		new BufferedReader(new InputStreamReader(new ClassPathResource("static/data/250soundcloud.txt").getInputStream(), StandardCharsets.UTF_8)).lines().forEach(sound -> {
-			String[] data = sound.split(", ", 2);
+			String[] data = sound.split(",", 2);
 			sounds.putIfAbsent(data[0], data[1]);
 		});
 		log.info("Found " + sounds.size() + " sounds." );

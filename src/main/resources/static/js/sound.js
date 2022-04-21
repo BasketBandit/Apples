@@ -13,12 +13,14 @@ $(document).ready(function() {
     player.bind(SC.Widget.Events.READY, function() {
         player.setVolume(50);
         $('#play-button').text("▶️");
-        //        player.getSounds(function(sounds) {
-        //            sounds.forEach((track) => {
-        //                var pub = track.publisher_metadata;
-        //                console.log(track.id + ", " + ((pub.artist == undefined) ? track.user.username : pub.artist) + " - " + track.title)
-        //            });
-        //        });
+//        setTimeout(function (){
+//            player.getSounds(function(sounds) {
+//                sounds.forEach((track) => {
+//                    var pub = track.publisher_metadata;
+//                    console.log(track.id + "," + ((pub.artist == undefined) ? track.user.username : pub.artist) + " - " + track.title)
+//                });
+//            });
+//        }, 5000);
         // for later :)
     });
 
@@ -58,8 +60,8 @@ $(document).ready(function() {
     });
 
     $('.giveup').on('click', function() {
-        for(var i = 0; i < 6; i++) {
-            attempts.push(i);
+        while(attempts.length < 5) {
+            attempts.push("");
         }
         submit();
     });
@@ -93,11 +95,8 @@ $(document).ready(function() {
     function submit() {
         player.getCurrentSound(function(currentSound) {
             var attempt = $(".in").val();
-            $(".in").val(""); // clears the old attempt
-            if(attempt == "") {
-                return;
-            }
             attempts.push(attempt);
+            $(".in").val(""); // clears the old attempt
 
             var publisher = currentSound.publisher_metadata;
             if(attempt == ((publisher.artist == undefined) ? currentSound.user.username : publisher.artist) + " - " + currentSound.title) {

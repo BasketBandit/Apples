@@ -68,7 +68,7 @@ a, a:visited, a:hover, a:active {
     display: inline-table;
 }
 
-.in {
+.text {
     font-size: 2em;
 }
 
@@ -76,8 +76,23 @@ a, a:visited, a:hover, a:active {
     height: 62px;
 }
 
-#inputGroup {
+#input {
+    position: relative;
     border-radius: 10px;
+}
+
+.next {
+    position: absolute;
+    color: #ffffff;
+    background-color: rgba(0,0,0,0.5);
+    right: 0;
+    top: 0;
+    width: 5rem;
+    height: 100%;
+    text-align: center;
+    line-height: 3.4em;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 #notification {

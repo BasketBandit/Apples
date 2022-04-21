@@ -14,7 +14,7 @@ $(document).ready(function() {
         }
     }
 
-    $(".in").keydown(function(e){
+    $(".text").keydown(function(e){
         if(e.keyCode === 13) {
             submitAttempt(letterMap);
         }
@@ -25,14 +25,14 @@ $(document).ready(function() {
     })
 
     function submitAttempt(map) {
-        var attempt = $(".in").val().toUpperCase();
+        var attempt = $(".text").val().toUpperCase();
 
         // validates an attempt for length and if it is a dictionary word
         if(complete || attempt.length < wordLetters.length || !words.includes(attempt)) {
             return;
         }
 
-        $(".in").val(""); // clears the old attempt
+        $(".text").val(""); // clears the old attempt
         attempts.push(attempt);
 
         var letterMap = new Map(map); // clone map
@@ -63,9 +63,9 @@ $(document).ready(function() {
         // if player has guessed correctly, offer harder difficulty (lim 15)
         if(correctPosition == wordLetters.length) {
             complete = true;
-            $("#inputGroup").html("<a href='" + word.length + "'><div id='notification' class='p-4 m-4'>gg go next</div></a>").removeClass("input-group").addClass('correct');
+            $("#input").html("<a href='" + word.length + "'><div id='notification' class='p-4 m-4'>gg go next</div></a>").removeClass("input-group").addClass('correct');
             if(word.length < 15) {
-                $("#inputGroup").append("<a href='" + (word.length+1) + "'><div id='difficulty' class='p-2'>harder 😩</div></a>");
+                $("#input").append("<a href='" + (word.length+1) + "'><div id='difficulty' class='p-2'>harder 😩</div></a>");
             }
             return;
         }
@@ -87,9 +87,9 @@ $(document).ready(function() {
         // if player has run out of attempts, offer an easier difficulty (lim 3)
         if(attempts.length > 4) {
             complete = true;
-            $("#inputGroup").html("<a href='" + word.length + "'><div id='notification' class='p-4 m-4'>Yikes... it was " + word + "</div></a>").removeClass("input-group").addClass('wrong');
+            $("#input").html("<a href='" + word.length + "'><div id='notification' class='p-4 m-4'>Yikes... it was " + word + "</div></a>").removeClass("input-group").addClass('wrong');
             if(word.length > 3) {
-                $("#inputGroup").append("<a href='" + (word.length-1) + "'><div id='difficulty' class='p-2'>im sussy 😭</div></a>");
+                $("#input").append("<a href='" + (word.length-1) + "'><div id='difficulty' class='p-2'>im sussy 😭</div></a>");
             }
         }
     }

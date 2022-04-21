@@ -11,7 +11,7 @@ $(document).ready(function() {
     var attempts = [];
 
     player.bind(SC.Widget.Events.READY, function() {
-        player.setVolume(50);
+        player.setVolume(7); // soundcloud volume oddly high
         $('#play-button').removeClass('btn-primary').removeClass('btn').addClass('play-ready').text("▶️");
 //        setTimeout(function (){
 //            player.getSounds(function(sounds) {
@@ -60,7 +60,7 @@ $(document).ready(function() {
         submit();
     });
 
-    $(".in").keydown(function(e){
+    $(".text").keydown(function(e){
         if(e.keyCode === 13) {
             submit();
         }
@@ -72,9 +72,9 @@ $(document).ready(function() {
 
     function displayTrackInfo(currentSound) {
         if(successful) {
-            $("#inputGroup").html("<a href=''><div id='notification' class='p-3 mt-2 mb-2'>Nice! You got it in " + successfulTime + " second(s)!</div></a>").removeClass("input-group").addClass('correct');
+            $("#input").html("<a href=''><div id='notification' class='p-3 mt-2 mb-2'>Nice! You got it in " + successfulTime + " second(s)!</div></a><a href=''><div class='next'>Next</div></a>").removeClass("input-group").addClass('correct');
         } else {
-            $("#inputGroup").html("<a href=''><div id='notification' class='p-3 mt-2 mb-2'>Yikes... that was a hard one!</div></a>").removeClass("input-group").addClass('wrong');
+            $("#input").html("<a href=''><div id='notification' class='p-3 mt-2 mb-2'>Yikes... that was a hard one!</div></a><a href=''><div class='next'>Next</div></a>").removeClass("input-group").addClass('wrong');
         }
 
         progress.max = maxTime = currentTime = 30000; // allow 30 second clip to be played
@@ -89,9 +89,9 @@ $(document).ready(function() {
 
     function submit() {
         player.getCurrentSound(function(currentSound) {
-            var attempt = $(".in").val();
+            var attempt = $(".text").val();
             attempts.push(attempt);
-            $(".in").val(""); // clears the old attempt
+            $(".text").val(""); // clears the old attempt
 
             var publisher = currentSound.publisher_metadata;
             if(attempt == ((publisher.artist == undefined) ? currentSound.user.username : publisher.artist) + " - " + currentSound.title) {

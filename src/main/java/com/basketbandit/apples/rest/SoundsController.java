@@ -12,7 +12,7 @@ import java.util.Random;
 
 @RestController
 public class SoundsController {
-    private static final Logger log = LoggerFactory.getLogger(WordsController.class);
+    private static final Logger log = LoggerFactory.getLogger(SoundsController.class);
     private static final HashMap<String, String> sounds = Application.sounds;
 
     @GetMapping("/sounds/")

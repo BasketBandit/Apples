@@ -26,8 +26,8 @@
                 <progress id="progress" class="rounded" value="0" max="16000">0</progress>
             </div>
 
-            <div id="inputGroup" class="input-group mt-2 mb-2">
-                <input type="text" class="in form-control">
+            <div id="input" class="input-group mt-2 mb-2">
+                <input type="text" class="text form-control">
                 <div class="input-group-append">
                     <button id="submit" class="btn btn-outline-secondary submit" type="button">Submit</button>
                 </div>
@@ -42,7 +42,7 @@
         <script th:src="|/js/soundapi.js|"></script>
         <script th:src="|/js/sound.js|"></script>
         <script th:inline="javascript">
-            $(".in").autocomplete({
+            $(".text").autocomplete({
               source: [[${sounds}]]
             });
         </script>

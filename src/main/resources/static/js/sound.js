@@ -77,10 +77,11 @@ $(document).ready(function() {
             $("#inputGroup").html("<a href=''><div id='notification' class='p-3 mt-2 mb-2'>Yikes... that was a hard one!</div></a>").removeClass("input-group").addClass('wrong');
         }
 
-        progress.max = currentTime = 30000; // allow 30 second clip to be played
+        progress.max = maxTime = currentTime = 30000; // allow 30 second clip to be played
         var publisher = currentSound.publisher_metadata;
         $('.help').addClass('d-none');
         $('.giveup').addClass('d-none');
+        $('div.line').remove();
         $('#track-art').prop("src", currentSound.artwork_url);
         $('#track-title').text(currentSound.title);
         $('#track-artist').text((publisher.artist == undefined) ? currentSound.user.username : publisher.artist);

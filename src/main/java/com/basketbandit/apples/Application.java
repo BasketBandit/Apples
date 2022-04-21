@@ -16,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -24,6 +25,7 @@ public class Application {
 	private static final Logger log = LoggerFactory.getLogger(Application.class);
 	public static BufferedImageBase64 image = new BufferedImageBase64(250,141, BufferedImage.TYPE_INT_ARGB);
 	public static final HashMap<Integer, ArrayList<String>> words = new HashMap<>();
+	public static final HashMap<String, String> sounds = new HashMap<>();
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -31,10 +33,17 @@ public class Application {
 
 	public Application() throws IOException {
 		log.info("Parsing words from /static/data/2019scrabble3plus.txt");
-		new BufferedReader(new InputStreamReader(new ClassPathResource("static/data/2019scrabble3plus.txt").getInputStream())).lines().forEach(word -> {
+		new BufferedReader(new InputStreamReader(new ClassPathResource("static/data/2019scrabble3plus.txt").getInputStream(), StandardCharsets.UTF_8)).lines().forEach(word -> {
 			words.computeIfAbsent(word.length(), k -> new ArrayList<>()).add(word);
 		});
 		log.info("Found words of length " + words.keySet());
+
+		log.info("Parsing sounds from /static/data/250soundcloud.txt");
+		new BufferedReader(new InputStreamReader(new ClassPathResource("static/data/250soundcloud.txt").getInputStream(), StandardCharsets.UTF_8)).lines().forEach(sound -> {
+			String[] data = sound.split(", ", 2);
+			sounds.putIfAbsent(data[0], data[1]);
+		});
+		log.info("Found " + sounds.size() + " sounds." );
 
 		try {
 			BufferedImage tmp = ImageIO.read(new File("canvas.png"));

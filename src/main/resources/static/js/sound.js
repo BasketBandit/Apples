@@ -72,7 +72,7 @@ $(document).ready(function() {
 
     function displayTrackInfo(currentSound) {
         if(successful) {
-            $("#inputGroup").html("<a href=''><div id='notification' class='p-3 mt-2 mb-2'>Nice! You got it in " + successfulTime + " second(s), and in only " + attempts.length + " attempt(s)!</div></a>").removeClass("input-group").addClass('correct');
+            $("#inputGroup").html("<a href=''><div id='notification' class='p-3 mt-2 mb-2'>Nice! You got it in " + successfulTime + " second(s)!</div></a>").removeClass("input-group").addClass('correct');
         } else {
             $("#inputGroup").html("<a href=''><div id='notification' class='p-3 mt-2 mb-2'>Yikes... that was a hard one!</div></a>").removeClass("input-group").addClass('wrong');
         }

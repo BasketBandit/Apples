@@ -5,7 +5,7 @@
         <div th:replace="banner"></div>
         <div class="container mt-1">
             <div id="track-information" class="d-flex rounded p-2 m-2">
-                <img id="track-art" alt="art" th:src="|/img/default.jpg|"/>
+                <img id="track-art" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="/>
                 <div class="d-inline-block px-3">
                     <h1 id="track-title">What?</h1>
                     <h2 id="track-artist" class="lead">Who?</h2>
@@ -13,12 +13,17 @@
             </div>
 
             <div id="attempts" class="mt-2 mb-2">
-                <div th:id="a+${x}" class="d-flex border sounds-attempt mt-1 mb-1" th:each="x:${#numbers.sequence(0, 4, 1)}" th:data_id="${x}"></div>
+                <div th:id="a+${x}" class="d-flex border sounds-attempt m-1" th:each="x:${#numbers.sequence(0, 4, 1)}" th:data_id="${x}"></div>
             </div>
 
             <div class="position-relative">
+                <div class="line line-hidden sixteen" style="width: 50%; left: 50%"></div>
+                <div class="line line-hidden eight" style="width: 25%; left: 25%"></div>
+                <div class="line line-hidden four" style="width: 12.5%; left: 12.5%"></div>
+                <div class="line line-hidden two" style="width: 6.25%; left: 6.25%"></div>
+                <div class="line" style="width: 6.25%;"></div>
                 <span id="progress-text" class="text-center">0:00 / 0:01</span>
-                <progress id="progress" class="rounded" value="0" max="1000">0</progress>
+                <progress id="progress" class="rounded" value="0" max="16000">0</progress>
             </div>
 
             <div id="inputGroup" class="input-group mt-2 mb-2">

@@ -26,7 +26,7 @@ $(document).ready(function() {
 
     player.bind(SC.Widget.Events.PLAY_PROGRESS, function(data) {
         progress.value = data.currentPosition;
-        $('#progress-text').text("0:" + pad(Math.floor(data.currentPosition / 1000)) + " / 0:" + pad(currentTime / 1000));
+        $('#progress-text').text("0:" + pad(Math.floor(data.currentPosition / 1000)) + " / 0:" + pad(maxTime / 1000));
         if(data.currentPosition >= currentTime) {
             player.pause();
             $('#play-button').text("▶️");
@@ -48,20 +48,14 @@ $(document).ready(function() {
     })
 
     $('.help').on('click', function() {
-        if(currentTime < maxTime) {
-            currentTime = currentTime * 2;
-            progress.max = currentTime;
-            $('#progress-text').text("0:00 / 0:" + pad(currentTime / 1000));
-            if(currentTime == maxTime) {
-                $('.help').addClass("d-none");
-                $('.giveup').removeClass("d-none");
-            }
-        }
+        attempts.push("-");
+        increaseTime();
+        displayAttempts();
     });
 
     $('.giveup').on('click', function() {
         while(attempts.length < 5) {
-            attempts.push("");
+            attempts.push("-");
         }
         submit();
     });
@@ -103,20 +97,37 @@ $(document).ready(function() {
                 successful = true;
                 successfulTime = currentTime / 1000;
                 displayTrackInfo(currentSound);
+            } else {
+                increaseTime();
             }
 
-            for(var i = 0; i < attempts.length; i++) {
-                $("#a"+(i)).text(attempts[i]);
-                if(successful && i == attempts.length-1) {
-                    $("#a"+(i)).addClass('correct');
-                }
-            }
+            displayAttempts();
 
             // if player has run out of attempts;
             if(attempts.length > 4) {
                 displayTrackInfo(currentSound);
             }
         });
+    }
+
+    function increaseTime() {
+        if(currentTime < maxTime) {
+            currentTime = currentTime * 2;
+            $('.line-hidden').last().removeClass('line-hidden');
+            if(currentTime == maxTime) {
+                $('.help').addClass("d-none");
+                $('.giveup').removeClass("d-none");
+            }
+        }
+    }
+
+    function displayAttempts() {
+        for(var i = 0; i < attempts.length; i++) {
+            $("#a"+(i)).text(attempts[i]);
+            if(successful && i == attempts.length-1) {
+                $("#a"+(i)).addClass('correct');
+            }
+        }
     }
 
     function pad(n) {

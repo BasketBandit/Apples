@@ -20,10 +20,12 @@ a, a:visited, a:hover, a:active {
 }
 
 .correct {
+    color: #ffffff;
     background: #4CBB17 !important;
 }
 
 .wrong {
+    color: #ffffff;
     background: #8F1C2A !important;
 }
 
@@ -66,17 +68,6 @@ a, a:visited, a:hover, a:active {
     display: inline-table;
 }
 
-.box-nav-place-title {
-    width: 100%;
-    background: rgba(0,0,0,0.5);
-    padding: 0.125em;
-    text-align: center;
-}
-
-.place {
-    background-image: url("/img/place.png");
-}
-
 .in {
     font-size: 2.75em;
 }
@@ -103,6 +94,66 @@ a, a:visited, a:hover, a:active {
 /*********************************************/
 /*********************************************/
 /*********************************************/
+
+.sounds {
+    background-image: url("/img/sounds.png");
+}
+
+.box-nav-sounds-title {
+    width: 100%;
+    background: rgba(0,0,0,0.5);
+    padding: 0.125em;
+    text-align: center;
+}
+
+.sounds-attempt {
+    background: rgba(0,0,0,0.1);
+    height: 50px;
+    font-size: 2em;
+    overflow: hidden;
+    padding-left: .5rem!important;
+    padding-right: .5rem!important;
+}
+
+#track-information {
+    color: #ffffff;
+    background: rgba(0,0,0,0.5);
+}
+
+#progress-text {
+    position: absolute;
+    font-size: 2em;
+    width: 100%;
+    height: 50px;
+}
+
+progress[value] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 50px;
+}
+
+progress[value]::-webkit-progress-bar {
+    background-color: #eee;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+/*********************************************/
+/*********************************************/
+/*********************************************/
+
+.place {
+    background-image: url("/img/place.png");
+}
+
+.box-nav-place-title {
+    width: 100%;
+    background: rgba(0,0,0,0.5);
+    padding: 0.125em;
+    text-align: center;
+}
 
 canvas {
     image-rendering: -moz-crisp-edges;

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="head"></head>
+    <body>
+        <div th:replace="banner"></div>
+        <div class="container mt-1">
+            <div id="track-information" class="d-flex rounded p-2 m-2">
+                <img id="track-art" alt="art" th:src="|/img/default.jpg|"/>
+                <div class="d-inline-block px-3">
+                    <h1 id="track-title">What?</h1>
+                    <h2 id="track-artist" class="lead">Who?</h2>
+                </div>
+            </div>
+
+            <div id="attempts" class="mt-2 mb-2">
+                <div th:id="a+${x}" class="d-flex border sounds-attempt mt-1 mb-1" th:each="x:${#numbers.sequence(0, 4, 1)}" th:data_id="${x}"></div>
+            </div>
+
+            <div class="position-relative">
+                <span id="progress-text" class="text-center">0:00 / 0:01</span>
+                <progress id="progress" class="rounded" value="0" max="1000">0</progress>
+            </div>
+
+            <div id="inputGroup" class="input-group mt-2 mb-2">
+                <input type="text" class="in form-control">
+                <div class="input-group-append">
+                    <button id="submit" class="btn btn-outline-secondary submit" type="button">Submit</button>
+                </div>
+            </div>
+
+            <div id="play-button" class="btn btn-primary play">Loading...</div>
+            <div class="btn btn-warning help">More Time!</div>
+            <div class="btn btn-danger giveup d-none">Tell me!</div>
+        </div>
+
+        <iframe style="display: none" scrolling="no" allow="autoplay" frameborder="no" th:src="@{https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{id}&auto_play=false(id=${sound})}"></iframe>
+        <script th:src="|/js/soundapi.js|"></script>
+        <script th:src="|/js/sound.js|"></script>
+        <script th:inline="javascript">
+            $(".in").autocomplete({
+              source: [[${sounds}]]
+            });
+        </script>
+    </body>
+</html>

@@ -92,18 +92,11 @@ $(document).ready(function() {
 
     function submit() {
         player.getCurrentSound(function(currentSound) {
-            // if player has run out of attempts;
-            if(attempts.length > 4) {
-                displayTrackInfo(currentSound);
-                return;
-            }
-
             var attempt = $(".in").val();
+            $(".in").val(""); // clears the old attempt
             if(attempt == "") {
                 return;
             }
-
-            $(".in").val(""); // clears the old attempt
             attempts.push(attempt);
 
             var publisher = currentSound.publisher_metadata;
@@ -118,6 +111,11 @@ $(document).ready(function() {
                 if(successful && i == attempts.length-1) {
                     $("#a"+(i)).addClass('correct');
                 }
+            }
+
+            // if player has run out of attempts;
+            if(attempts.length > 4) {
+                displayTrackInfo(currentSound);
             }
         });
     }

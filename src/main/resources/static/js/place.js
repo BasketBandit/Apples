@@ -2,12 +2,12 @@ $(document).ready(function() {
     var ping;
     var canvas = document.querySelector('canvas');
     var ctx = canvas.getContext('2d', {antialias: false});
-    canvas.width = 250;
+    canvas.width = 500;
     canvas.height = 141;
     canvas.style.width = canvas.width * 5; // scales x axis by 5
     canvas.style.height = canvas.height * 5; // scales y axis by 5;
 
-    var selectedColour = "ffffff";
+    var selectedColour = "null";
 
     function connect() {
         ws = new WebSocket('wss://localhost:' + location.port +'/place/events');
@@ -89,6 +89,9 @@ $(document).ready(function() {
 
     canvas.addEventListener('mousedown', (e) => {
         var p = getCanvasMouseRelativePosition(e);
+        if(selectedColour == "null") {
+            return;
+        }
         send("place:" + p.x + "," + p.y + "," + selectedColour);
     });
 

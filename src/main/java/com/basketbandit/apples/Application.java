@@ -23,7 +23,7 @@ import java.util.HashMap;
 @SpringBootApplication
 public class Application {
 	private static final Logger log = LoggerFactory.getLogger(Application.class);
-	public static BufferedImageBase64 image = new BufferedImageBase64(250,141, BufferedImage.TYPE_INT_ARGB);
+	public static BufferedImageBase64 image = new BufferedImageBase64(500,141, BufferedImage.TYPE_INT_ARGB);
 	public static final HashMap<Integer, ArrayList<String>> words = new HashMap<>();
 	public static final HashMap<String, String> sounds = new HashMap<>();
 

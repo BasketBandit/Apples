@@ -94,7 +94,7 @@ $(document).ready(function() {
 
     canvas.addEventListener('mousedown', (e) => {
         var p = getCanvasMouseRelativePosition(e);
-        if(selectedColour == "null" || $('#canvas-container').data('z') < 1) {
+        if(selectedColour == "null" || $('#canvas-container').data('z') < 1 || e.button !== 0) { // null colour, <1 zoom, left click
             return;
         }
         send("place:" + p.x + "," + p.y + "," + selectedColour);
@@ -112,6 +112,9 @@ $(document).ready(function() {
     })
 
     canvasControls.addEventListener('mousedown', (e) => {
+        if(e.button !== 2) { // right click
+            return;
+        }
         canvasControlsMouse = true;
         xx = e.clientX;
         yy = e.clientY;
@@ -120,6 +123,9 @@ $(document).ready(function() {
     });
 
     canvasControls.addEventListener('mouseup', (e) => {
+        if(e.button !== 2) { // right click
+            return;
+        }
         canvasControlsMouse = false;
     });
 

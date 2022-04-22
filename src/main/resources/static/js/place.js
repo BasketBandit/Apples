@@ -1,5 +1,8 @@
 $(document).ready(function() {
     var ping;
+    var canvasControls = document.getElementById('canvas-controls');
+    var canvasControlsMouse = false;
+    var xx, yy, tx, ty;
     var canvas = document.querySelector('canvas');
     var ctx = canvas.getContext('2d', {antialias: false});
     canvas.width = 500;
@@ -79,8 +82,10 @@ $(document).ready(function() {
 
     function getCanvasMouseRelativePosition(e) {
         var rect = canvas.getBoundingClientRect();
-        var x = Math.floor((e.clientX - rect.left)/5);
-        var y = Math.floor((e.clientY - rect.top)/5);
+        var x = Math.floor(Math.floor((e.clientX - rect.left)/5) / $('#canvas-container').data('z'));
+        x = (x == -1) ? 0 : x == canvas.width ? x-1 : x;
+        var y = Math.floor(Math.floor((e.clientY - rect.top)/5) / $('#canvas-container').data('z'));
+        y = (y == -1) ? 0 : y == canvas.height ? y-1 : y;
         return {
             x:x,
             y:y
@@ -89,7 +94,7 @@ $(document).ready(function() {
 
     canvas.addEventListener('mousedown', (e) => {
         var p = getCanvasMouseRelativePosition(e);
-        if(selectedColour == "null") {
+        if(selectedColour == "null" || $('#canvas-container').data('z') < 1) {
             return;
         }
         send("place:" + p.x + "," + p.y + "," + selectedColour);
@@ -105,6 +110,45 @@ $(document).ready(function() {
         $('a').removeClass('border-primary');
         $(this).addClass('border-primary');
     })
+
+    canvasControls.addEventListener('mousedown', (e) => {
+        canvasControlsMouse = true;
+        xx = e.clientX;
+        yy = e.clientY;
+        tx = $('#canvas-container').data('tx');
+        ty = $('#canvas-container').data('ty')
+    });
+
+    canvasControls.addEventListener('mouseup', (e) => {
+        canvasControlsMouse = false;
+    });
+
+    canvasControls.addEventListener('mousemove', (e) => {
+        if(canvasControlsMouse) {
+            var deltaX = tx + (e.clientX - xx);
+            var deltaY = ty + (e.clientY - yy);
+            $('#canvas-container').data('tx', deltaX);
+            $('#canvas-container').data('ty', deltaY);
+            $('#canvas-container').css('transform', 'translate('+deltaX+'px,'+deltaY+'px) scale('+ $("#canvas-container").data("z") +')');
+        }
+    });
+
+    canvasControls.addEventListener('wheel', (e) => {
+        if(e.deltaY !== 0) {
+            var delta;
+            if(e.deltaY < 0) {
+                delta = 0.1;
+            } else {
+                delta = -0.1;
+            }
+            var zoom = $('#canvas-container').data('z') + delta;
+            zoom = (zoom < 0.1) ? 0.1 : zoom > 4.0 ? 4.0 : $('#canvas-container').data('z') + delta; // minimum 0.1, maximum 4
+            zoom = Math.round(zoom * 10) / 10; // deal with strange math
+            $('#canvas-container').data('z', zoom);
+            $('#zoom').text("zoom: " + zoom + "x" + ((zoom < 1) ? " (drawing disabled)" : ""));
+            $('#canvas-container').css('transform', 'translate('+ $("#canvas-container").data("tx") +'px,'+ $("#canvas-container").data("ty") +'px) scale('+zoom+')');
+        }
+    });
 
     connect();
 })

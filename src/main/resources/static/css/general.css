@@ -1,3 +1,9 @@
+html, body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
 .m-n1 {
     margin: 0.125rem !important;
 }
@@ -232,7 +238,38 @@ canvas {
     border: solid;
     border-color: #222222;
     border-width: 1px!important;
+    background: #ffffff;
+    margin-top: 58px;
     overflow: auto;
+}
+
+#canvas-controls {
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    background: rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+#coords, #zoom, #colours {
+    position: absolute;
+}
+
+#colours {
+    top: 10px;
+}
+
+#coords {
+    top: 5px;
+}
+
+#zoom {
+    top: 25px;
+}
+
+#coords, #zoom {
+    left: 10px;
 }
 
 .border-primary {

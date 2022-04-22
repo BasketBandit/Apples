@@ -3,7 +3,14 @@
     <head th:replace="head"></head>
     <body>
         <div th:replace="banner"></div>
-        <div class="container mt-1">
+        <div id="canvas-controls">
+            <div id="canvas-container" class="canvas-container text-center d-flex" data-tx="0" data-ty="0" data-z="1">
+                <canvas id="canvas"></canvas>
+            </div>
+
+            <div id="coords" class="text-center">x = 0, y = 0</div>
+            <div id="zoom" class="text-center">zoom: 1x</div>
+
             <div id="colours" class="input-group justify-content-center mb-1">
                 <a class="cbox border colourSelector" data-hex="B21F35" style="background-color:#B21F35"></a>
                 <a class="cbox border colourSelector" data-hex="D82735" style="background-color:#D82735"></a>
@@ -33,11 +40,6 @@
                 <a class="cbox border colourSelector border-primary" data-hex="null" style="background-position: center; background-repeat: no-repeat; background-size: 34px 34px; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAtxJREFUWEfNmb+LE1EQx7+zSQxRLBQUBVuxsbvisBDsbt8mXHeFWFlbCTZ2V9nYWFlaif9AhO28JWksRK5JY+udwQNBJF4u3CUjWZPc/ng/k91o2p03+9nvvHlvZkJY4cdC1AGcpFzsD9Ier1ZfU2/vybKvIdeFLMQjAG+V67KAScMKenTQvevyTmtAFuIlgGdG5zrA88UT6ncrRl8ArABZCLZxFtvYAcam1O8a3681YN9/CKJ31nCOgHO/OlAlIAfBMZgbWrgw9Agwqss37xttVJBSQBbiN4CLKjgKQ2NoZGtNoDLI3IvY9x+AaE8KF4YVAiZOIZcY60CzkHlARUIsq1qWz6Qi7lRqFEVni/2ZdKDK1rXBzWCSKi4U5CB4DOY32S9eN1w2s88BZaHd3KzQ7m7pe04W9rmKMSAHwQ0w98tQzyYhpDZEZ/StU/sLKFGviNDawM1FUalYGqALXCyS5DCfhlkOOBxeoSj6uex55wqnVJHoB7EQYwBeEmaV8C4Lp1SxyP0X+1JUMzaVizTMRQEu/EgAbeBKVTD1kRlAW7jSAHMRSAC6wJUCKL27Z4CucIUDKtuA/YFVKW9bL06PmWlpk2pgTMeMrkcxrdWdrdIsVlx19ygMP0q/UtNArQInDTHhyOmqK0s596tu2hJm+o4y4cyA29uXcXr6S1Vu/Qs4eHRCh52GvmAdjW6hXj8ouruz6VNSBWss8dZWE5733raCWTUhdHXg9FkOUFW4yoDXBReD5uQ2zGHWCScHbLVuYzz+Ig11tXqJ2u1j222gsnOpGVWjj+8ArhedHKam3Wr0sdi8QhwBuKZVazhsUBSlJ6ySBSawZFLkjjrt3dhsbmAy+eQUUof5YOzXw4QO1cNMqynVfzvATCrHvv8cRC+MatooOGvKjb5sR8Ap0CBogbmtdK4DrNJn+trZsAGb21iFWHlc7OxcwGAwSj3P/Q1Re0W9D09doJK2fwDBdpVahhQ39AAAAABJRU5ErkJggg==')"></a>
             </div>
         </div>
-
-        <div class="canvas-container text-center d-flex">
-            <canvas id="canvas"></canvas>
-        </div>
-        <div id="coords" class="text-center"></div>
 
         <script th:src="|/js/place.js|"></script>
     </body>

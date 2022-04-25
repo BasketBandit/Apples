@@ -245,7 +245,7 @@ canvas {
     overflow: auto;
 }
 
-#canvas-controls {
+#canvas-controller {
     position: relative;
     display: flex;
     flex-flow: column;
@@ -254,24 +254,22 @@ canvas {
     overflow: hidden;
 }
 
-#coords, #zoom, #colours {
+#canvas-info {
+    width: 230px;
+    padding: 0.5rem;
+    color: #ffffff;
+    background: rgba(0,0,0,0.5);
+    top: 5px;
+    left: 5px;
+    border-radius: 5px;
+}
+
+#canvas-info, #colours {
     position: absolute;
 }
 
 #colours {
     top: 10px;
-}
-
-#coords {
-    top: 5px;
-}
-
-#zoom {
-    top: 25px;
-}
-
-#coords, #zoom {
-    left: 10px;
 }
 
 .border-primary {

@@ -33,13 +33,13 @@ public class SocketHandler extends TextWebSocketHandler {
                 return;
             }
 
-            if(message.getPayload().equals("retrieve")) {
-                session.sendMessage(new TextMessage("retrieve:data:image/png;base64," + Application.image.getAsBase64Png()));
+            if(message.getPayload().equals("r")) {
+                session.sendMessage(new TextMessage("r:data:image/png;base64," + Application.image.getAsBase64Png()));
                 return;
             }
 
-            if(message.getPayload().startsWith("place:")) {
-                String[] data = message.getPayload().substring(6).split(",");
+            if(message.getPayload().startsWith("p:")) {
+                String[] data = message.getPayload().substring(2).split(",");
 
                 // make sure data is valid (kind of)
                 if(data.length < 3 || !Sanitiser.isHexadecimal(data[0] + data[1] + data[2])) {

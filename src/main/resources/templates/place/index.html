@@ -3,13 +3,16 @@
     <head th:replace="head"></head>
     <body oncontextmenu="return false;">
         <div th:replace="banner"></div>
-        <div id="canvas-controls">
-            <div id="canvas-container" class="canvas-container text-center d-flex" data-tx="0" data-ty="0" data-z="1">
+        <div id="canvas-controller">
+            <div id="canvas-container" class="canvas-container text-center d-flex">
                 <canvas id="canvas"></canvas>
             </div>
 
-            <div id="coords" class="text-center">x = 0, y = 0</div>
-            <div id="zoom" class="text-center">zoom: 1x</div>
+            <div id="canvas-info">
+                <div id="status">Status: Disconnected</div>
+                <div id="coords">X: 0, Y: 0</div>
+                <div id="zoom">Zoom: 1x</div>
+            </div>
 
             <div id="colours" class="input-group justify-content-center mb-1">
                 <a class="cbox border colourSelector" data-hex="B21F35" style="background-color:#B21F35"></a>

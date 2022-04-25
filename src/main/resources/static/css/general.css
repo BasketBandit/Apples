@@ -233,12 +233,9 @@ canvas {
 
 .canvas-container {
     position: absolute;
-    width: 2504px;
-    height: 707px;
+    width: 5000px; /* 500 */
+    height: 1410px; /* 141 */
     margin: auto;
-    border: solid;
-    border-color: #222222;
-    border-width: 1px!important;
     background: #ffffff;
     top: 58px;
     left: 25px;

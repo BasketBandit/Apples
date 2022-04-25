@@ -1,19 +1,20 @@
 $(document).ready(function() {
     var canvas = document.querySelector('canvas');
+    var canvasZoom = 10; // multiplier
     canvas.width = 500;
     canvas.height = 141;
-    canvas.style.width = canvas.width * 5; // scales x axis by 5
-    canvas.style.height = canvas.height * 5; // scales y axis by 5;
+    canvas.style.width = canvas.width * canvasZoom;
+    canvas.style.height = canvas.height * canvasZoom;
     var ctx = canvas.getContext('2d', {antialias: false});
     var canvasController = document.getElementById('canvas-controller');
-    var canvasMouse = Array.from({length: 3}, i => i = false);;
-    var clickX = 0, clickY = 0, transX = 0, transY = 0, deltaX = 0, deltaY = 0, zoom = 1;
+    var canvasMouse = Array.from({length: 3}, i => i = false);
+    var clickX = 0, clickY = 0, transX = -1250, transY = -350, deltaX = -1250, deltaY = -350, zoom = 0.5; // weird offsets to center pre-zoomed canvas
     var selectedColour = "null";
     var ping;
 
     function connect() {
         ws = new WebSocket('wss://localhost:' + location.port +'/place/events');
-        $('#status').text("Status: Connecting...");
+        $('#status').text("Connecting...");
 
         ws.addEventListener('message', function(event) {
             if(event.data.startsWith("r:")) {
@@ -29,7 +30,7 @@ $(document).ready(function() {
         });
 
         ws.addEventListener('open', function(event) {
-            $('#status').text("Status: Connected");
+            $('#status').text("Connected");
             ping = setInterval(function(){ send("ping"); }, 30000); // ping the server every 30 seconds to keep the connection alive
             send("r");
         });
@@ -39,7 +40,7 @@ $(document).ready(function() {
         });
 
         ws.addEventListener('close', function(event) {
-            $('#status').text("Status: Connection lost...");
+            $('#status').text("Connection lost...");
             clearInterval(ping); // clear the ping interval to stop pinging the server after it has closed
             connect();
         });
@@ -68,9 +69,9 @@ $(document).ready(function() {
 
     function getCanvasMouseRelativePosition(e) {
         var rect = canvas.getBoundingClientRect();
-        var x = Math.floor(Math.floor((e.clientX - rect.left)/5) / zoom);
+        var x = Math.floor(((e.clientX - rect.left)/canvasZoom) / zoom);
         x = (x == -1) ? 0 : x == canvas.width ? x-1 : x;
-        var y = Math.floor(Math.floor((e.clientY - rect.top)/5) / zoom);
+        var y = Math.floor(((e.clientY - rect.top)/canvasZoom) / zoom);
         y = (y == -1) ? 0 : y == canvas.height ? y-1 : y;
         return {
             x:x,
@@ -80,7 +81,7 @@ $(document).ready(function() {
 
     canvas.addEventListener('mousedown', (e) => {
         var p = getCanvasMouseRelativePosition(e);
-        if(selectedColour == "null" || zoom < 1 || e.button !== 0) { // null colour, <1 zoom, left click
+        if(selectedColour == "null" || zoom < 0.5 || e.button !== 0) { // null colour, <1 zoom, left click
             return;
         }
         send("p:" + p.x + "," + p.y + "," + selectedColour);
@@ -131,8 +132,8 @@ $(document).ready(function() {
             var delta = (e.deltaY < 0) ? 0.1 : -0.1;
             var temp = zoom + delta;
             temp = (temp < 0.1) ? 0.1 : temp > 4.0 ? 4.0 : temp; // minimum 0.1, maximum 4
-            zoom = Math.round(temp * 10) / 10; // deal with strange math
-            $('#zoom').text("Zoom: " + zoom + "x" + ((zoom < 1) ? " (drawing disabled)" : ""));
+            zoom = Math.round(temp * 10) / 10; // deal with strange non-precise math
+            $('#zoom').text("zoom: " + zoom + "x" + ((zoom < 0.5) ? " (drawing disabled)" : ""));
             $('#canvas-container').css('transform', 'translate('+deltaX+'px,'+deltaY+'px) scale('+zoom+')');
         }
     });

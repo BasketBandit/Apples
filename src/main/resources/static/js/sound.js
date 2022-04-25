@@ -11,17 +11,8 @@ $(document).ready(function() {
     var attempts = [];
 
     player.bind(SC.Widget.Events.READY, function() {
-        player.setVolume(7); // soundcloud volume oddly high
+        player.setVolume(15); // soundcloud volume oddly high
         $('#play-button').removeClass('btn-primary').removeClass('btn').addClass('play-ready').text("▶️");
-//        setTimeout(function (){
-//            player.getSounds(function(sounds) {
-//                sounds.forEach((track) => {
-//                    var pub = track.publisher_metadata;
-//                    console.log(track.id + "," + ((pub.artist == undefined) ? track.user.username : pub.artist) + " - " + track.title)
-//                });
-//            });
-//        }, 5000);
-        // for later :)
     });
 
     player.bind(SC.Widget.Events.PLAY_PROGRESS, function(data) {

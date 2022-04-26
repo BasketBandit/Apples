@@ -48,9 +48,13 @@ $(document).ready(function() {
         var correctPosition = 0;
         for(var i = 0; i < letters.length; i++) {
             if(letters[i] == wordLetters[i]) {
-                $("#a"+(index)+" #l"+i).animate({
-                    backgroundColor: '#4CBB17'
-                }, 500);
+                $("#a"+(index)+" #l"+i).css({
+                    'background': '#4CBB17',
+                    '-webkit-transition': 'all 0.5s linear',
+                    '-moz-transition': 'all 0.5s linear',
+                    '-o-transition': 'all 0.5s linear',
+                    'transition': 'all 0.5s linear',
+                });
                 correctPosition++;
                 if(letterMap.get(letters[i]) == 1) {
                     letterMap.delete(letters[i]);
@@ -73,9 +77,13 @@ $(document).ready(function() {
         // check each letter of the attempt against the answer, colour the non-matching positions in yellow
         for(var i = 0; i < letters.length; i++) {
             if(letterMap.has(letters[i]) && wordLetters.includes(letters[i]) && (letters[i] != wordLetters[i])) {
-                $("#a"+(index)+" #l"+i).animate({
-                    backgroundColor: '#FFD55E'
-                }, 500);
+                $("#a"+(index)+" #l"+i).css({
+                    'background': '#FFD55E',
+                    '-webkit-transition': 'all 0.5s linear',
+                    '-moz-transition': 'all 0.5s linear',
+                    '-o-transition': 'all 0.5s linear',
+                    'transition': 'all 0.5s linear',
+                });
                 if(letterMap.get(letters[i]) == 1) {
                     letterMap.delete(letters[i]);
                 } else {

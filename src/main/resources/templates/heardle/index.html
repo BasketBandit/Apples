@@ -1,6 +1,11 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="head"></head>
+    <head>
+        <fragment th:replace="meta"></fragment>
+        <fragment th:replace="stylesheet"></fragment>
+        <fragment th:replace="javascript"></fragment>
+        <link rel="stylesheet" type="text/css" href="/css/jquery-ui-1.13.1.css">
+    </head>
     <body oncontextmenu="return false;">
         <div th:replace="banner"></div>
         <div class="container mt-2 shaded">
@@ -39,8 +44,10 @@
         </div>
 
         <iframe style="display: none" scrolling="no" allow="autoplay" frameborder="no" th:src="@{https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{id}&auto_play=false(id=${sound})}"></iframe>
+
         <script th:src="|/js/heardle/soundcloudapi.js|"></script>
         <script th:src="|/js/heardle/heardle.js|"></script>
+        <script th:src="|/js/jquery-ui-1.13.1.min.js|"></script>
         <script th:inline="javascript">
             $(".text").autocomplete({
               source: [[${sounds}]]

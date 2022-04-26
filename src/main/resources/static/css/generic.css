@@ -116,13 +116,27 @@ a, a:visited, a:hover, a:active {
 /*********************************************/
 /*********************************************/
 
-.heardle {
-    background-image: url("/img/sounds.png");
+.wordle {
+    background-image: url("/img/wordle.webp");
 }
 
-.box-nav-sounds-title {
+.box-nav-wordle-title {
     width: 100%;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+/*********************************************/
+/*********************************************/
+/*********************************************/
+
+.heardle {
+    background-image: url("/img/heardle.webp");
+}
+
+.box-nav-heardle-title {
+    width: 100%;
+    background: rgba(0,0,0,0.3);
     padding: 0.125em;
     text-align: center;
 }
@@ -153,7 +167,7 @@ a, a:visited, a:hover, a:active {
 #track-art {
     width: 100px;
     height: 100px;
-    background-image: url("/img/default.jpg");
+    background-image: url("/img/default.webp");
 }
 
 .line {
@@ -214,12 +228,12 @@ progress[value]::-webkit-progress-value {
 /*********************************************/
 
 .place {
-    background-image: url("/img/place.png");
+    background-image: url("/img/place.webp");
 }
 
 .box-nav-place-title {
     width: 100%;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.3);
     padding: 0.125em;
     text-align: center;
 }

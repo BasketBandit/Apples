@@ -67,9 +67,9 @@ $(document).ready(function() {
         // if player has guessed correctly, offer harder difficulty (lim 15)
         if(correctPosition == wordLetters.length) {
             complete = true;
-            $("#input").html("<a href='" + word.length + "'><div id='notification' class='p-4 m-4'>gg go next</div></a>").removeClass("input-group").addClass('correct');
+            $("#input").html("<a href='wordle?letters=" + word.length + "'><div id='notification' class='p-4 m-4'>gg go next</div></a>").removeClass("input-group").addClass('correct');
             if(word.length < 15) {
-                $("#input").append("<a href='" + (word.length+1) + "'><div id='difficulty' class='p-2'>harder 😩</div></a>");
+                $("#input").append("<a href='wordle?letters=" + (word.length+1) + "'><div id='difficulty' class='p-2'>harder 😩</div></a>");
             }
             return;
         }
@@ -95,9 +95,9 @@ $(document).ready(function() {
         // if player has run out of attempts, offer an easier difficulty (lim 3)
         if(attempts.length > 4) {
             complete = true;
-            $("#input").html("<a href='" + word.length + "'><div id='notification' class='p-4 m-4'>Yikes... it was " + word + "</div></a>").removeClass("input-group").addClass('wrong');
+            $("#input").html("<a href='wordle?letters=" + word.length + "'><div id='notification' class='p-4 m-4'>Yikes... it was " + word + "</div></a>").removeClass("input-group").addClass('wrong');
             if(word.length > 3) {
-                $("#input").append("<a href='" + (word.length-1) + "'><div id='difficulty' class='p-2'>im sussy 😭</div></a>");
+                $("#input").append("<a href='wordle?letters=" + (word.length-1) + "'><div id='difficulty' class='p-2'>im sussy 😭</div></a>");
             }
         }
     }

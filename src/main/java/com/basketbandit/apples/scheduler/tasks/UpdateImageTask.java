@@ -16,7 +16,7 @@ public class UpdateImageTask implements Task {
         try {
             ImageIO.write(Application.image, "png", new File("canvas.png"));
         } catch(Exception e) {
-            //
+            log.error("Unable to write canvas.png to disk, reason: {}", e.getMessage(), e);
         }
     }
 

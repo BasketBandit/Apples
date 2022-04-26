@@ -1,7 +1,5 @@
 package com.basketbandit.apples.util;
 
-import com.basketbandit.apples.Application;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -16,12 +14,12 @@ public class BufferedImageBase64 extends BufferedImage {
     }
 
     public String getAsBase64Png() {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        try(OutputStream outputStream = Base64.getEncoder().wrap(byteArrayOutputStream)) {
-            ImageIO.write(Application.image, "png", outputStream);
+        try(ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            OutputStream outputStream = Base64.getEncoder().wrap(byteArrayOutputStream)) {
+            ImageIO.write(this, "png", outputStream);
+            return byteArrayOutputStream.toString();
         } catch (final IOException ioe) {
             throw new UncheckedIOException(ioe);
         }
-        return byteArrayOutputStream.toString();
     }
 }

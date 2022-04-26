@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 @Component
-public class SocketHandler extends TextWebSocketHandler {
-    private static final Logger log = LoggerFactory.getLogger(SocketHandler.class);
+public class PlaceSocketHandler extends TextWebSocketHandler {
+    private static final Logger log = LoggerFactory.getLogger(PlaceSocketHandler.class);
     private static final ArrayList<WebSocketSession> clients = new ArrayList<>();
     private static final HashMap<String, Color> usedColours = new HashMap<>();
 

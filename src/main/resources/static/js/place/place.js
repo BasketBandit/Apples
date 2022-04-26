@@ -13,7 +13,7 @@ $(document).ready(function() {
     var ping;
 
     function connect() {
-        ws = new WebSocket('wss://localhost:' + location.port +'/place/events');
+        ws = new WebSocket('wss://' + location.host + ':' + location.port + '/place/events');
         $('#status').text("Connecting...");
 
         ws.addEventListener('message', function(event) {

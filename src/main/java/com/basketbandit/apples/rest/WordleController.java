@@ -14,29 +14,29 @@ import java.util.HashMap;
 import java.util.Random;
 
 @RestController
-public class WordsController {
-    private static final Logger log = LoggerFactory.getLogger(WordsController.class);
+public class WordleController {
+    private static final Logger log = LoggerFactory.getLogger(WordleController.class);
     private static final HashMap<Integer, ArrayList<String>> words = Application.words;
 
-    @GetMapping("/words/")
+    @GetMapping("/wordle/")
     public ModelAndView words() {
-        ModelAndView modelAndView = new ModelAndView("./words/index");
+        ModelAndView modelAndView = new ModelAndView("./wordle/index");
         modelAndView.addObject("letters", words.keySet());
         return modelAndView;
     }
 
-    @GetMapping("/words/{x}")
+    @GetMapping("/wordle/{x}")
     public ModelAndView play(@PathVariable String x) {
         int type = Sanitiser.isNumeric(x) ? Integer.parseInt(x) : 5;
         ArrayList<String> list = words.getOrDefault(type, words.get(5)); // this should ensure that all possible inputs will resolve
-        ModelAndView modelAndView = new ModelAndView("./words/play");
+        ModelAndView modelAndView = new ModelAndView("./wordle/play");
         modelAndView.addObject("words", list);
         modelAndView.addObject("word", list.get(new Random(System.currentTimeMillis()).nextInt(list.size()-1)));
         modelAndView.addObject("length", type);
         return modelAndView;
     }
 
-    @GetMapping("/words/list/{x}")
+    @GetMapping("/wordle/list/{x}")
     public ArrayList<String> words(@PathVariable String x) {
         int type = Sanitiser.isNumeric(x) ? Integer.parseInt(x) : 5;
         return words.getOrDefault(type, words.get(5));

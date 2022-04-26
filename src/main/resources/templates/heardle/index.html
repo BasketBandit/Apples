@@ -39,8 +39,8 @@
         </div>
 
         <iframe style="display: none" scrolling="no" allow="autoplay" frameborder="no" th:src="@{https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{id}&auto_play=false(id=${sound})}"></iframe>
-        <script th:src="|/js/soundapi.js|"></script>
-        <script th:src="|/js/sound.js|"></script>
+        <script th:src="|/js/heardle/soundcloudapi.js|"></script>
+        <script th:src="|/js/heardle/heardle.js|"></script>
         <script th:inline="javascript">
             $(".text").autocomplete({
               source: [[${sounds}]]

@@ -1,6 +1,6 @@
 package com.basketbandit.apples.scheduler.tasks;
 
-import com.basketbandit.apples.Application;
+import com.basketbandit.apples.rest.PlaceController;
 import com.basketbandit.apples.scheduler.Task;
 
 import javax.imageio.ImageIO;
@@ -14,7 +14,7 @@ public class UpdateImageTask implements Task {
     @Override
     public void run() {
         try {
-            ImageIO.write(Application.image, "png", new File("canvas.png"));
+            ImageIO.write(PlaceController.image, "png", new File("canvas.png"));
         } catch(Exception e) {
             log.error("Unable to write canvas.png to disk, reason: {}", e.getMessage(), e);
         }

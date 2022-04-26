@@ -1,6 +1,6 @@
 package com.basketbandit.apples.socket;
 
-import com.basketbandit.apples.Application;
+import com.basketbandit.apples.rest.PlaceController;
 import com.basketbandit.apples.util.Sanitiser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +34,7 @@ public class PlaceSocketHandler extends TextWebSocketHandler {
             }
 
             if(message.getPayload().equals("r")) {
-                session.sendMessage(new TextMessage("r:data:image/png;base64," + Application.image.getAsBase64Png()));
+                session.sendMessage(new TextMessage("r:data:image/png;base64," + PlaceController.image.getAsBase64Png()));
                 return;
             }
 
@@ -47,7 +47,7 @@ public class PlaceSocketHandler extends TextWebSocketHandler {
                 }
 
                 // update BufferedImage
-                Application.image.setRGB(Integer.parseInt(data[0]), Integer.parseInt(data[1]), usedColours.computeIfAbsent(data[2], k -> new Color((int) Long.parseLong(data[2], 16))).getRGB());
+                PlaceController.image.setRGB(Integer.parseInt(data[0]), Integer.parseInt(data[1]), usedColours.computeIfAbsent(data[2], k -> new Color((int) Long.parseLong(data[2], 16))).getRGB());
 
                 // update all connected clients
                 for(WebSocketSession client : clients) {

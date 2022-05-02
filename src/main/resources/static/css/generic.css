@@ -265,8 +265,7 @@ canvas {
     overflow: hidden;
 }
 
-#canvas-info {
-    width: 230px;
+#coords {
     padding: 0.5rem;
     color: #ffffff;
     background: rgba(0,0,0,0.5);
@@ -275,7 +274,16 @@ canvas {
     border-radius: 5px;
 }
 
-#canvas-info, #colours {
+#lastPixelUpdate {
+    padding: 0.5rem;
+    color: #ffffff;
+    background: rgba(0,0,0,0.5);
+    bottom: 5px;
+    left: 5px;
+    border-radius: 5px;
+}
+
+#colours, #coords, #lastPixelUpdate {
     position: absolute;
 }
 

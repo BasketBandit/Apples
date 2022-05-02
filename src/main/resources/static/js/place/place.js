@@ -1,49 +1,81 @@
 $(document).ready(function() {
-    var canvas = document.querySelector('canvas');
     var canvasZoom = 10; // multiplier
-    canvas.width = 500;
-    canvas.height = 141;
-    canvas.style.width = canvas.width * canvasZoom;
-    canvas.style.height = canvas.height * canvasZoom;
+    var canvasMinZoomRatio = 0.1;
+    var canvasMaxZoomRatio = 4.0;
+    var canvasMinDrawRatio = 0.5;
+    var canvas = document.querySelector('canvas');
+        canvas.width = 500;
+        canvas.height = 141;
+        canvas.style.width = canvas.width * canvasZoom;
+        canvas.style.height = canvas.height * canvasZoom;
     var ctx = canvas.getContext('2d', {antialias: false});
+        ctx.textBaseline = 'middle';
+        ctx.textAlign = 'center';
+        ctx.font = '36px sans-serif';
     var canvasController = document.getElementById('canvas-controller');
     var canvasMouse = Array.from({length: 3}, i => i = false);
     var clickX = 0, clickY = 0, transX = -1250, transY = -350, deltaX = -1250, deltaY = -350, zoom = 0.5; // weird offsets to center pre-zoomed canvas
     var selectedColour = "null";
     var ping;
+    var lastPixelUpdateLabel;
+    var lastPixelUpdate = 0;
+    var connectedClients = 0;
 
     function connect() {
         ws = new WebSocket('wss://' + location.host + ':' + location.port + '/place/events');
-        $('#status').text("Connecting...");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillText('connecting...', canvas.width/2, canvas.height/2);
 
-        ws.addEventListener('message', function(event) {
-            if(event.data.startsWith("r:")) {
-                var image = new Image();
-                image.onload = function() {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height)
-                    ctx.drawImage(image, 0, 0);
-                };
-                image.src = event.data.substring(2, event.data.length)
-                return;
-            }
-            update(event.data);
-        });
-
-        ws.addEventListener('open', function(event) {
-            $('#status').text("Connected");
+        ws.onopen = function(event) {
             ping = setInterval(function(){ send("ping"); }, 30000); // ping the server every 30 seconds to keep the connection alive
             send("r");
-        });
+        };
 
-        ws.addEventListener('error', function(event) {
+        ws.onerror = function(event) {
             ws.close();
-        });
+        };
 
-        ws.addEventListener('close', function(event) {
-            $('#status').text("Connection lost...");
+        ws.onclose = function(event) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillText('connection lost...', canvas.width/2, canvas.height/2);
             clearInterval(ping); // clear the ping interval to stop pinging the server after it has closed
             connect();
-        });
+        };
+
+        ws.onmessage = function(event) {
+            const data = event.data;
+
+            if(data.startsWith("r:")) {
+                var image = new Image();
+                image.onload = function() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(image, 0, 0);
+                };
+                image.src = data.substring(2, data.length);
+                return;
+            }
+
+            if(data.startsWith("c:")) {
+                connectedClients = data.substring(2, data.length);
+                $('.lead').text("Wipes comically large bead of sweat from forehead of " + connectedClients + " connected client" + ((connectedClients > 1) ? "s." : ".")); // neat right?
+                return;
+            }
+
+            if(data.startsWith("u:")) {
+                lastPixelUpdate = data.substring(2, data.length)*1; // need to *1 because value isn't parsed as a number
+                $('#lastPixelUpdate').text("last update " + dayjs(lastPixelUpdate).fromNow()); // 3 separate js files for this functionality
+                lastPixelUpdateLabel = setInterval(function(){$('#lastPixelUpdate').text("last update " + dayjs(lastPixelUpdate).fromNow())},1000);
+                return;
+            }
+
+            if(data.startsWith("p:")) {
+                lastPixelUpdate = new Date();
+                var segment = data.substring(2, data.length).split(',');
+                ctx.fillStyle = "#" + segment[2];
+                ctx.fillRect(segment[0], segment[1], 1, 1); // x, y, w, h
+                return;
+            }
+        };
     }
 
     function send(data) {
@@ -58,30 +90,27 @@ $(document).ready(function() {
         }
     }
 
-    function update(data) {
-        if(data.startsWith("p:")) {
-            var segment = data.substring(2, data.length).split(',');
-            ctx.fillStyle = "#" + segment[2];
-            ctx.fillRect(segment[0], segment[1], 1, 1); // x, y, w, h
-            return;
-        }
-    }
-
     function getCanvasMouseRelativePosition(e) {
         var rect = canvas.getBoundingClientRect();
         var x = Math.floor(((e.clientX - rect.left)/canvasZoom) / zoom);
-        x = (x == -1) ? 0 : x == canvas.width ? x-1 : x;
+            x = (x == -1) ? 0 : x == canvas.width ? x-1 : x;
         var y = Math.floor(((e.clientY - rect.top)/canvasZoom) / zoom);
-        y = (y == -1) ? 0 : y == canvas.height ? y-1 : y;
+            y = (y == -1) ? 0 : y == canvas.height ? y-1 : y;
         return {
             x:x,
             y:y
         }
     }
 
+    $('.colourSelector').on('click', function() {
+        selectedColour = $(this).data('hex');
+        $('a').removeClass('border-primary');
+        $(this).addClass('border-primary');
+    })
+
     canvas.addEventListener('mousedown', (e) => {
         var p = getCanvasMouseRelativePosition(e);
-        if(selectedColour == "null" || zoom < 0.5 || e.button !== 0) { // null colour, <1 zoom, left click
+        if(selectedColour == "null" || zoom < canvasMinDrawRatio || e.button !== 0) { // null colour, <zoom, left click
             return;
         }
         send("p:" + p.x + "," + p.y + "," + selectedColour);
@@ -89,14 +118,9 @@ $(document).ready(function() {
 
     canvas.addEventListener('mousemove', (e) => {
         var p = getCanvasMouseRelativePosition(e);
-        $('#coords').text("X: "+p.x+", Y: "+p.y);
+        $('#xCord').text(p.x);
+        $('#yCord').text(p.y);
     });
-
-    $('.colourSelector').on('click', function() {
-        selectedColour = $(this).data('hex');
-        $('a').removeClass('border-primary');
-        $(this).addClass('border-primary');
-    })
 
     canvasController.addEventListener('mousedown', (e) => {
         if(e.button !== 1 && e.button !== 2) { // middle click || right click
@@ -131,9 +155,9 @@ $(document).ready(function() {
         if(e.deltaY !== 0) {
             var delta = (e.deltaY < 0) ? 0.1 : -0.1;
             var temp = zoom + delta;
-            temp = (temp < 0.1) ? 0.1 : temp > 4.0 ? 4.0 : temp; // minimum 0.1, maximum 4
+            temp = (temp < canvasMinZoomRatio) ? canvasMinZoomRatio : temp > canvasMaxZoomRatio ? canvasMaxZoomRatio : temp; // minimum 0.1, maximum 4
             zoom = Math.round(temp * 10) / 10; // deal with strange non-precise math
-            $('#zoom').text("zoom: " + zoom + "x" + ((zoom < 0.5) ? " (drawing disabled)" : ""));
+            $('#zCord').text(zoom + "x" + ((zoom < canvasMinDrawRatio) ? " (drawing disabled)" : ""));
             $('#canvas-container').css('transform', 'translate('+deltaX+'px,'+deltaY+'px) scale('+zoom+')');
         }
     });

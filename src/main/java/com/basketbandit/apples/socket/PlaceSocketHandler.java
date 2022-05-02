@@ -19,6 +19,7 @@ public class PlaceSocketHandler extends TextWebSocketHandler {
     private static final Logger log = LoggerFactory.getLogger(PlaceSocketHandler.class);
     private static final ArrayList<WebSocketSession> clients = new ArrayList<>();
     private static final HashMap<String, Color> usedColours = new HashMap<>();
+    private static long lastPixelUpdate = System.currentTimeMillis();
 
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) {
@@ -35,6 +36,8 @@ public class PlaceSocketHandler extends TextWebSocketHandler {
 
             if(message.getPayload().equals("r")) {
                 session.sendMessage(new TextMessage("r:data:image/png;base64," + PlaceController.image.getAsBase64Png()));
+                session.sendMessage(new TextMessage("c:" + clients.size()));
+                session.sendMessage(new TextMessage("u:" + lastPixelUpdate));
                 return;
             }
 
@@ -48,6 +51,7 @@ public class PlaceSocketHandler extends TextWebSocketHandler {
 
                 // update BufferedImage
                 PlaceController.image.setRGB(Integer.parseInt(data[0]), Integer.parseInt(data[1]), usedColours.computeIfAbsent(data[2], k -> new Color((int) Long.parseLong(data[2], 16))).getRGB());
+                lastPixelUpdate = System.currentTimeMillis();
 
                 // update all connected clients
                 for(WebSocketSession client : clients) {
@@ -64,10 +68,24 @@ public class PlaceSocketHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) {
         clients.add(session);
+        clients.forEach(client -> {
+            try {
+                client.sendMessage(new TextMessage("c:" + clients.size()));
+            } catch(Exception e) {
+                log.warn("There was a problem contacting client, reason: {}", e.getMessage(), e);
+            }
+        });
     }
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
         clients.remove(session);
+        clients.forEach(client -> {
+            try {
+                client.sendMessage(new TextMessage("c:" + clients.size()));
+            } catch(Exception e) {
+                log.warn("There was a problem contacting client, reason: {}", e.getMessage(), e);
+            }
+        });
     }
 }

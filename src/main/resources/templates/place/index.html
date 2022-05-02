@@ -12,11 +12,8 @@
                 <canvas id="canvas"></canvas>
             </div>
 
-            <div id="canvas-info">
-                <div id="status">Disconnected</div>
-                <div id="coords">X: 0, Y: 0</div>
-                <div id="zoom">zoom: 0.5x</div>
-            </div>
+            <div id="coords">X: <span id="xCord">0</span>, Y: <span id="yCord">0</span>, Z: <span id="zCord">0.5x</span></div>
+            <div id="lastPixelUpdate">last update unknown...</div>
 
             <div id="colours" class="input-group justify-content-center mb-1">
                 <a class="cbox border colourSelector" data-hex="B21F35" style="background-color:#B21F35"></a>
@@ -48,6 +45,30 @@
             </div>
         </div>
 
+        <script th:src="|/js/day.min.js|"></script>
+        <script th:src="|/js/relativeTime.js|"></script>
+        <script th:src="|/js/updateLocale.js|"></script>
+        <script>
+            dayjs.extend(window.dayjs_plugin_relativeTime);
+            dayjs.extend(window.dayjs_plugin_updateLocale);
+            dayjs.updateLocale('en', {
+                relativeTime: {
+                    future: "in %s",
+                    past: "%s ago",
+                    s: 'moments',
+                    m: "a minute",
+                    mm: "%d minutes",
+                    h: "an hour",
+                    hh: "%d hours",
+                    d: "a day",
+                    dd: "%d days",
+                    M: "a month",
+                    MM: "%d months",
+                    y: "a year",
+                    yy: "%d years"
+                }
+            });
+        </script>
         <script th:src="|/js/place/place.js|"></script>
     </body>
 </html>

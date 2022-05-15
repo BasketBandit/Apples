@@ -44,7 +44,7 @@ public class Application {
 		log.info("Found " + HeardleController.sounds.size() + " sounds." );
 
 		try {
-			BufferedImage tmp = ImageIO.read(new File("canvas.png")); // BufferedImage cannot be cast; we have to set data manually.
+			BufferedImage tmp = ImageIO.read(new File("/data/canvas.png")); // BufferedImage cannot be cast; we have to set data manually.
 			PlaceController.image.setData(tmp.getRaster());
 		} catch(Exception e) {
 			log.warn("Failed to load existing image, reason: {}", e.getMessage());

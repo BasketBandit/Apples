@@ -1,11 +1,11 @@
 FROM openjdk:17-alpine
 
-COPY entrypoint.sh /entrypoint.sh
-CMD chmod +x entrypoint.sh
+WORKDIR /app
+RUN mkdir data
 
-COPY build/libs/apples-0.1.0.jar /apples-0.1.0.jar
-CMD chmod +x apples-0.1.0.jar
+COPY build/libs/apples-0.1.0.jar .
+RUN chmod +x apples-0.1.0.jar
 
-EXPOSE 443
+EXPOSE 8443
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["java", "-jar", "apples-0.1.0.jar"]

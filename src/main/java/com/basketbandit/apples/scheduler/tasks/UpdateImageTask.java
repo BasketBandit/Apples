@@ -14,7 +14,7 @@ public class UpdateImageTask implements Task {
     @Override
     public void run() {
         try {
-            ImageIO.write(PlaceController.image, "png", new File("/data/canvas.png"));
+            ImageIO.write(PlaceController.image, "png", new File("./data/canvas.png"));
         } catch(Exception e) {
             log.error("Unable to write canvas.png to disk, reason: {}", e.getMessage(), e);
         }

@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 @RestController
-public class WordleController implements Controller {
+public class WordleController implements Controller<Object> {
     private static final Logger log = LoggerFactory.getLogger(WordleController.class);
     private static final HashMap<Integer, ArrayList<String>> words = new HashMap<>();
 
@@ -33,6 +33,11 @@ public class WordleController implements Controller {
         } catch(Exception e) {
             log.warn("There was an issue while reading the wordle data file, reason: {}", e.getMessage(), e);
         }
+    }
+
+    @Override
+    public HashMap<Integer, ArrayList<String>> getData() {
+        return words;
     }
 
     @GetMapping("/wordle")

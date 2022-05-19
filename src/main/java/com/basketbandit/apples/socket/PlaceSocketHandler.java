@@ -17,6 +17,7 @@ import java.util.HashMap;
 @Component
 public class PlaceSocketHandler extends TextWebSocketHandler {
     private static final Logger log = LoggerFactory.getLogger(PlaceSocketHandler.class);
+    private static final PlaceController placeController = new PlaceController();
     private static final ArrayList<WebSocketSession> clients = new ArrayList<>();
     private static final HashMap<String, Color> usedColours = new HashMap<>();
     private static long lastPixelUpdate = System.currentTimeMillis();
@@ -35,7 +36,7 @@ public class PlaceSocketHandler extends TextWebSocketHandler {
             }
 
             if(message.getPayload().equals("r")) {
-                session.sendMessage(new TextMessage("r:data:image/png;base64," + PlaceController.image.getAsBase64Png()));
+                session.sendMessage(new TextMessage("r:data:image/png;base64," + placeController.getData().getAsBase64Png()));
                 session.sendMessage(new TextMessage("c:" + clients.size()));
                 session.sendMessage(new TextMessage("u:" + lastPixelUpdate));
                 return;
@@ -50,7 +51,7 @@ public class PlaceSocketHandler extends TextWebSocketHandler {
                 }
 
                 // update BufferedImage
-                PlaceController.image.setRGB(Integer.parseInt(data[0]), Integer.parseInt(data[1]), usedColours.computeIfAbsent(data[2], k -> new Color((int) Long.parseLong(data[2], 16))).getRGB());
+                placeController.getData().setRGB(Integer.parseInt(data[0]), Integer.parseInt(data[1]), usedColours.computeIfAbsent(data[2], k -> new Color((int) Long.parseLong(data[2], 16))).getRGB());
                 lastPixelUpdate = System.currentTimeMillis();
 
                 // update all connected clients

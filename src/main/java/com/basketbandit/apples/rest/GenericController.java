@@ -7,11 +7,16 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-public class GenericController implements Controller {
+public class GenericController implements Controller<Object> {
     private static final Logger log = LoggerFactory.getLogger(GenericController.class);
 
     @Override
     public void init() {
+    }
+
+    @Override
+    public Object getData() {
+        return null;
     }
 
     @GetMapping("/")

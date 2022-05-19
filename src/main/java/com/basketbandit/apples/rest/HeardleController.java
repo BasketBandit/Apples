@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 @RestController
-public class HeardleController implements Controller {
+public class HeardleController implements Controller<Object> {
     private static final Logger log = LoggerFactory.getLogger(HeardleController.class);
     private static final HashMap<String, String> sounds = new HashMap<>();
 
@@ -30,6 +30,11 @@ public class HeardleController implements Controller {
         } catch(Exception e) {
             log.warn("There was an issue while reading the heardle data file, reason: {}", e.getMessage(), e);
         }
+    }
+
+    @Override
+    public HashMap<String, String> getData() {
+        return sounds;
     }
 
     @GetMapping("/heardle")

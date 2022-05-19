@@ -15,9 +15,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 @RestController
-public class PlaceController implements Controller {
+public class PlaceController implements Controller<Object> {
     private static final Logger log = LoggerFactory.getLogger(PlaceController.class);
-    public static BufferedImageBase64 image = new BufferedImageBase64(500,141, BufferedImage.TYPE_INT_ARGB);
+    private static final BufferedImageBase64 image = new BufferedImageBase64(500,141, BufferedImage.TYPE_INT_ARGB);
 
     @Override
     public void init() {
@@ -29,6 +29,11 @@ public class PlaceController implements Controller {
         } catch(Exception e) {
             log.warn("Failed to load existing image, reason: {}", e.getMessage());
         }
+    }
+
+    @Override
+    public BufferedImageBase64 getData() {
+        return image;
     }
 
     @GetMapping("/place")

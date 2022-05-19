@@ -47,7 +47,7 @@ public class WordleController implements Controller<Object> {
         ArrayList<String> list = words.getOrDefault(type, words.get(5)); // this should ensure that all possible inputs will resolve
         ModelAndView modelAndView = new ModelAndView("./wordle/index");
         modelAndView.addObject("letters", words.keySet());
-        modelAndView.addObject("word", list.get(new Random(System.currentTimeMillis()).nextInt(list.size()-1)));
+        modelAndView.addObject("word", list.get(new Random(System.currentTimeMillis()).nextInt(list.size())));
         modelAndView.addObject("words", list);
         modelAndView.addObject("length", type);
         return modelAndView;

@@ -41,7 +41,7 @@ public class HeardleController implements Controller<Object> {
     public ModelAndView heardle() {
         ModelAndView modelAndView = new ModelAndView("./heardle/index");
         modelAndView.addObject("sounds", sounds.values());
-        modelAndView.addObject("sound", sounds.keySet().toArray()[new Random(System.currentTimeMillis()).nextInt(sounds.size()-1)]);
+        modelAndView.addObject("sound", sounds.keySet().toArray()[new Random(System.currentTimeMillis()).nextInt(sounds.size())]);
         return modelAndView;
     }
 }

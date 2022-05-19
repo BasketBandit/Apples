@@ -4,8 +4,6 @@ import com.basketbandit.apples.scheduler.ScheduleHandler;
 import com.basketbandit.apples.scheduler.jobs.UpdateJob;
 import com.basketbandit.apples.scheduler.tasks.UpdateImageTask;
 import com.basketbandit.apples.util.BufferedImageBase64;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,7 +14,6 @@ import java.io.File;
 
 @RestController
 public class PlaceController implements Controller<Object> {
-    private static final Logger log = LoggerFactory.getLogger(PlaceController.class);
     private static final BufferedImageBase64 image = new BufferedImageBase64(500,141, BufferedImage.TYPE_INT_ARGB);
 
     @Override

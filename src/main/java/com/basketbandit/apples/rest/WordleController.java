@@ -1,10 +1,7 @@
 package com.basketbandit.apples.rest;
 
 import com.basketbandit.apples.util.Sanitiser;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,7 +16,6 @@ import java.util.Random;
 
 @RestController
 public class WordleController implements Controller<Object> {
-    private static final Logger log = LoggerFactory.getLogger(WordleController.class);
     private static final HashMap<Integer, ArrayList<String>> words = new HashMap<>();
 
     @Override
@@ -53,8 +49,8 @@ public class WordleController implements Controller<Object> {
         return modelAndView;
     }
 
-    @GetMapping("/wordle/list/{x}")
-    public ArrayList<String> words(@PathVariable String x) {
+    @GetMapping("/wordle/list")
+    public ArrayList<String> words(@RequestParam(defaultValue = "5") String x) {
         int type = Sanitiser.isNumeric(x) ? Integer.parseInt(x) : 5;
         return words.getOrDefault(type, words.get(5));
     }

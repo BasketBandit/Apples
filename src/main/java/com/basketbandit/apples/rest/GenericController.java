@@ -7,8 +7,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-public class GenericController {
+public class GenericController implements Controller {
     private static final Logger log = LoggerFactory.getLogger(GenericController.class);
+
+    @Override
+    public void init() {
+    }
 
     @GetMapping("/")
     public ModelAndView root() {

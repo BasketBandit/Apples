@@ -9,14 +9,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
 @RestController
-public class WordleController {
+public class WordleController implements Controller {
     private static final Logger log = LoggerFactory.getLogger(WordleController.class);
-    public static final HashMap<Integer, ArrayList<String>> words = new HashMap<>();
+    private static final HashMap<Integer, ArrayList<String>> words = new HashMap<>();
+
+    @Override
+    public void init() {
+        try(BufferedReader r = new BufferedReader(new InputStreamReader(new FileInputStream("./data/wordle.txt"), StandardCharsets.UTF_8))) {
+            log.info("Parsing words from ./data/wordle.txt");
+            r.lines().forEach(word -> {
+                words.computeIfAbsent(word.length(), k -> new ArrayList<>()).add(word);
+            });
+            log.info("Found words of length " + words.keySet());
+        } catch(Exception e) {
+            log.warn("There was an issue while reading the wordle data file, reason: {}", e.getMessage(), e);
+        }
+    }
 
     @GetMapping("/wordle")
     public ModelAndView wordle(@RequestParam(defaultValue = "5") String letters) {

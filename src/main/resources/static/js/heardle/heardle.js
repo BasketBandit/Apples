@@ -12,7 +12,7 @@ $(document).ready(function() {
 
     player.bind(SC.Widget.Events.READY, function() {
         player.setVolume(15); // soundcloud volume oddly high
-        $('#play-button').removeClass('btn-primary').removeClass('btn').addClass('play-ready').text("▶️");
+        $('#play-button').text("Play");
     });
 
     player.bind(SC.Widget.Events.PLAY_PROGRESS, function(data) {
@@ -20,7 +20,7 @@ $(document).ready(function() {
         $('#progress-text').text("0:" + pad(Math.floor(data.currentPosition / 1000)) + " / 0:" + pad(maxTime / 1000));
         if(data.currentPosition >= currentTime) {
             player.pause();
-            $('#play-button').text("▶️");
+            $('#play-button').text("Play");
         }
     });
 
@@ -29,11 +29,11 @@ $(document).ready(function() {
             if(p == true) {
                 player.seekTo(0);
                 player.play();
-                $('#play-button').text("⏸");
+                $('#play-button').text("Pause");
             } else {
                 player.pause();
                 progress.value = 0;
-                $('#play-button').text("▶️");
+                $('#play-button').text("Play");
             }
         });
     })

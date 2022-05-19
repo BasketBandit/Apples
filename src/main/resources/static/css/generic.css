@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+
 html, body {
     display: flex;
     flex-direction: column;
     height: 100%;
+    font-family: 'Roboto', sans-serif;
 }
 
 .m-n1 {
@@ -44,7 +47,7 @@ a, a:visited, a:hover, a:active {
     justify-content: center;
     vertical-align: middle;
     font-size: 2.75em;
-    line-height: 1.75em;
+    line-height: 1.85em;
     color: #222222 !important;
 }
 
@@ -56,7 +59,7 @@ a, a:visited, a:hover, a:active {
     justify-content: center;
     vertical-align: middle;
     font-size: 2.75em;
-    line-height: 2.75em;
+    line-height: 2.85em;
     color: #ffffff !important;
 }
 
@@ -67,7 +70,7 @@ a, a:visited, a:hover, a:active {
     justify-content: center;
     vertical-align: middle;
     font-size: 0.45em;
-    line-height: 1.2;
+    line-height: 1.3em;
 }
 
 .box-nav-wordle-title {
@@ -223,6 +226,10 @@ progress[value]::-webkit-progress-value {
     transform: translate(0px, -12px);
 }
 
+.play, .help, .giveup {
+    width: 110px;
+}
+
 /*********************************************/
 /*********************************************/
 /*********************************************/
@@ -304,7 +311,7 @@ canvas {
     justify-content: center;
     vertical-align: middle;
     font-size: 2.75em;
-    line-height: 1.75;
+    line-height: 1.75em;
     color: #222222 !important;
     cursor: pointer;
     margin-right: 0.175rem;

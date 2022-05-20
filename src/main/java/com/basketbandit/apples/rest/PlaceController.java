@@ -14,7 +14,7 @@ import java.io.File;
 
 @RestController
 public class PlaceController implements Controller<Object> {
-    private static final BufferedImageBase64 image = new BufferedImageBase64(500,141, BufferedImage.TYPE_INT_ARGB);
+    private static final BufferedImageBase64 image = new BufferedImageBase64(500,282, BufferedImage.TYPE_INT_ARGB);
 
     @Override
     public void init() {

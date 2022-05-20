@@ -254,8 +254,6 @@ canvas {
 
 .canvas-container {
     position: absolute;
-    width: 5000px; /* 500 */
-    height: 1410px; /* 141 */
     margin: auto;
     background: #ffffff;
     top: 58px;

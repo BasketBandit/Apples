@@ -1,11 +1,12 @@
 $(document).ready(function() {
+    var clickX = 0, clickY = 0, transX = -1250, transY = -700, deltaX = -1250, deltaY = -700, zoom = 0.5; // weird offsets to center pre-zoomed canvas
     var canvasZoom = 10; // multiplier
     var canvasMinZoomRatio = 0.1;
     var canvasMaxZoomRatio = 4.0;
     var canvasMinDrawRatio = 0.5;
     var canvas = document.querySelector('canvas');
         canvas.width = 500;
-        canvas.height = 141;
+        canvas.height = 282;
         canvas.style.width = canvas.width * canvasZoom;
         canvas.style.height = canvas.height * canvasZoom;
     var ctx = canvas.getContext('2d', {antialias: false});
@@ -14,12 +15,12 @@ $(document).ready(function() {
         ctx.font = '36px sans-serif';
     var canvasController = document.getElementById('canvas-controller');
     var canvasMouse = Array.from({length: 3}, i => i = false);
-    var clickX = 0, clickY = 0, transX = -1250, transY = -350, deltaX = -1250, deltaY = -350, zoom = 0.5; // weird offsets to center pre-zoomed canvas
     var selectedColour = "null";
     var ping;
     var lastPixelUpdateLabel;
     var lastPixelUpdate = 0;
     var connectedClients = 0;
+    $('#canvas-container').css({'width': '' + canvas.width * canvasZoom + 'px','height':'' + canvas.height * canvasZoom + 'px','transform': 'translate(' + deltaX + 'px,' + deltaY + 'px) scale(' + zoom + ')'});
 
     function connect() {
         ws = new WebSocket('wss://' + location.host + ':' + location.port + '/place/events');

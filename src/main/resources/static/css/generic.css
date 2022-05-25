@@ -28,6 +28,17 @@ a, a:visited, a:hover, a:active {
     background: #6F8FAF !important;
 }
 
+.navbar-fixed-bottom {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.navbar-fixed-bottom a {
+    color: #DC143C;
+}
+
 .correct {
     color: #ffffff;
     background: #4CBB17 !important;

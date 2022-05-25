@@ -4,6 +4,7 @@ import com.basketbandit.apples.rest.GenericController;
 import com.basketbandit.apples.rest.HeardleController;
 import com.basketbandit.apples.rest.PlaceController;
 import com.basketbandit.apples.rest.WordleController;
+import com.basketbandit.apples.util.Utilities;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,6 +34,6 @@ class ApplesApplicationTest {
 	void dataIsLoaded() {
 		assertThat(wordleController.getData().isEmpty()).isFalse();
 		assertThat(heardleController.getData().isEmpty()).isFalse();
-		assertThat(placeController.getData().getAsBase64Png().equals("")).isFalse();
+		assertThat(Utilities.image2base64(placeController.getData()).equals("")).isFalse();
 	}
 }

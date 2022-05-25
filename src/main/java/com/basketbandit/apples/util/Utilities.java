@@ -8,17 +8,19 @@ import java.io.OutputStream;
 import java.io.UncheckedIOException;
 import java.util.Base64;
 
-public class BufferedImageBase64 extends BufferedImage {
-    public BufferedImageBase64(int width, int height, int imageType) {
-        super(width, height, imageType);
-    }
+public class Utilities {
 
-    public String getAsBase64Png() {
+    /**
+     * Converts a BufferedImage object into a base64 png equivalent string.
+     * @param image {@link BufferedImage}
+     * @return {@link String}
+     */
+    public static String image2base64(BufferedImage image) {
         try(ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             OutputStream outputStream = Base64.getEncoder().wrap(byteArrayOutputStream)) {
-            ImageIO.write(this, "png", outputStream);
+            ImageIO.write(image, "png", outputStream);
             return byteArrayOutputStream.toString();
-        } catch (final IOException ioe) {
+        } catch(final IOException ioe) {
             throw new UncheckedIOException(ioe);
         }
     }

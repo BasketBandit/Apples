@@ -2,6 +2,7 @@ package com.basketbandit.apples.socket;
 
 import com.basketbandit.apples.rest.PlaceController;
 import com.basketbandit.apples.util.Sanitiser;
+import com.basketbandit.apples.util.Utilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -36,7 +37,7 @@ public class PlaceSocketHandler extends TextWebSocketHandler {
             }
 
             if(message.getPayload().equals("r")) {
-                session.sendMessage(new TextMessage("r:data:image/png;base64," + placeController.getData().getAsBase64Png()));
+                session.sendMessage(new TextMessage("r:data:image/png;base64," + Utilities.image2base64(placeController.getData())));
                 session.sendMessage(new TextMessage("c:" + clients.size()));
                 session.sendMessage(new TextMessage("u:" + lastPixelUpdate));
                 return;

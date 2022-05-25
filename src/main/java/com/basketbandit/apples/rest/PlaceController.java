@@ -3,7 +3,7 @@ package com.basketbandit.apples.rest;
 import com.basketbandit.apples.scheduler.ScheduleHandler;
 import com.basketbandit.apples.scheduler.jobs.UpdateJob;
 import com.basketbandit.apples.scheduler.tasks.UpdateImageTask;
-import com.basketbandit.apples.util.BufferedImageBase64;
+import com.basketbandit.apples.util.Utilities;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,7 +14,7 @@ import java.io.File;
 
 @RestController
 public class PlaceController implements Controller<Object> {
-    private static final BufferedImageBase64 image = new BufferedImageBase64(500,282, BufferedImage.TYPE_INT_ARGB);
+    private static final BufferedImage image = new BufferedImage(500,282, BufferedImage.TYPE_INT_ARGB);
 
     @Override
     public void init() {
@@ -29,14 +29,14 @@ public class PlaceController implements Controller<Object> {
     }
 
     @Override
-    public BufferedImageBase64 getData() {
+    public BufferedImage getData() {
         return image;
     }
 
     @GetMapping("/place")
     public ModelAndView place() {
         ModelAndView modelAndView = new ModelAndView("./place/index");
-        modelAndView.addObject("image", image.getAsBase64Png());
+        modelAndView.addObject("image", Utilities.image2base64(image));
         return modelAndView;
     }
 }

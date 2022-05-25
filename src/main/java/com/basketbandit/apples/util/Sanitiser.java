@@ -7,7 +7,7 @@ public class Sanitiser {
     private static final Pattern HEX_PATTERN = Pattern.compile("^\\p{XDigit}+$");
 
     /**
-     * Checks to see if a string is a number or not without the whole Integer.parseInt() exception thang.
+     * Checks to see if the input is a number, without the whole Integer.parseInt() exception flow.
      * @param string {@link String}
      * @return boolean
      */

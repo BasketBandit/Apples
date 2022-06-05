@@ -2,6 +2,7 @@ package com.basketbandit.apples.rest;
 
 import com.basketbandit.apples.util.Sanitiser;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,11 +16,11 @@ import java.util.HashMap;
 import java.util.Random;
 
 @RestController
+@RequestMapping("/wordle")
 public class WordleController implements Controller<Object> {
     private static final HashMap<Integer, ArrayList<String>> words = new HashMap<>();
 
-    @Override
-    public void init() {
+    public WordleController() {
         try(BufferedReader r = new BufferedReader(new InputStreamReader(new FileInputStream("./data/wordle.txt"), StandardCharsets.UTF_8))) {
             log.info("Parsing words from ./data/wordle.txt");
             r.lines().forEach(word -> {
@@ -36,7 +37,7 @@ public class WordleController implements Controller<Object> {
         return words;
     }
 
-    @GetMapping("/wordle")
+    @GetMapping("")
     public ModelAndView wordle(@RequestParam(defaultValue = "5") String letters) {
         int type = Sanitiser.isNumeric(letters) ? Integer.parseInt(letters) : 5;
         type = words.containsKey(type) ? type : 5;
@@ -49,9 +50,16 @@ public class WordleController implements Controller<Object> {
         return modelAndView;
     }
 
-    @GetMapping("/wordle/list")
-    public ArrayList<String> words(@RequestParam(defaultValue = "5") String x) {
-        int type = Sanitiser.isNumeric(x) ? Integer.parseInt(x) : 5;
-        return words.getOrDefault(type, words.get(5));
+    @GetMapping("/api/v1/words")
+    public ArrayList<String> words(@RequestParam(defaultValue = "5") String letters) {
+        int x = Sanitiser.isNumeric(letters) ? Integer.parseInt(letters) : 5;
+        return words.getOrDefault(x, words.get(5));
+    }
+
+    @GetMapping("/api/v1/word")
+    public String word(@RequestParam(defaultValue = "5") String letters) {
+        int x = Sanitiser.isNumeric(letters) ? Integer.parseInt(letters) : 5;
+        ArrayList<String> list = words.getOrDefault(x, words.get(5));
+        return words.getOrDefault(x, words.get(5)).get(new Random(System.currentTimeMillis()).nextInt(list.size()));
     }
 }

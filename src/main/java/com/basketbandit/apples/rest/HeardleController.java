@@ -1,6 +1,7 @@
 package com.basketbandit.apples.rest;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -12,11 +13,11 @@ import java.util.HashMap;
 import java.util.Random;
 
 @RestController
+@RequestMapping("/heardle")
 public class HeardleController implements Controller<Object> {
     private static final HashMap<String, String> sounds = new HashMap<>();
 
-    @Override
-    public void init() {
+    public HeardleController() {
         try(BufferedReader r = new BufferedReader(new InputStreamReader(new FileInputStream("./data/heardle.txt"), StandardCharsets.UTF_8))) {
             log.info("Parsing sounds from ./data/heardle.txt");
             r.lines().forEach(sound -> {
@@ -34,7 +35,7 @@ public class HeardleController implements Controller<Object> {
         return sounds;
     }
 
-    @GetMapping("/heardle")
+    @GetMapping("")
     public ModelAndView heardle() {
         ModelAndView modelAndView = new ModelAndView("./heardle/index");
         modelAndView.addObject("sounds", sounds.values());

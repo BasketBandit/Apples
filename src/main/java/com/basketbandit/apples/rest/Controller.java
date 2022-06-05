@@ -5,7 +5,5 @@ import org.slf4j.LoggerFactory;
 
 public interface Controller<T> {
     Logger log = LoggerFactory.getLogger(Controller.class);
-
-    void init();
     T getData();
 }

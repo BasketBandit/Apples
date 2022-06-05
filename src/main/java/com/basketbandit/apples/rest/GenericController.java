@@ -6,11 +6,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public class GenericController implements Controller<Object> {
-
-    @Override
-    public void init() {
-    }
-
     @Override
     public Object getData() {
         return null;

@@ -1,7 +1,7 @@
 package com.basketbandit.apples.rest;
 
+import com.basketbandit.apples.util.Utilities;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -9,13 +9,14 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.Random;
 
 @RestController
-@RequestMapping("/heardle")
+
 public class HeardleController implements Controller<Object> {
     private static final HashMap<String, String> sounds = new HashMap<>();
+    record RandomSound(Collection<String> sounds, String random_sound){}
 
     public HeardleController() {
         try(BufferedReader r = new BufferedReader(new InputStreamReader(new FileInputStream("./data/heardle.txt"), StandardCharsets.UTF_8))) {
@@ -35,11 +36,13 @@ public class HeardleController implements Controller<Object> {
         return sounds;
     }
 
-    @GetMapping("")
+    @GetMapping("/heardle")
     public ModelAndView heardle() {
-        ModelAndView modelAndView = new ModelAndView("./heardle/index");
-        modelAndView.addObject("sounds", sounds.values());
-        modelAndView.addObject("sound", sounds.keySet().toArray()[new Random(System.currentTimeMillis()).nextInt(sounds.size())]);
-        return modelAndView;
+        return new ModelAndView("./heardle/index");
+    }
+
+    @GetMapping("/api/v1/sounds")
+    public RandomSound sounds() {
+        return new RandomSound(sounds.values(), sounds.keySet().toArray()[Utilities.random(sounds.size())].toString());
     }
 }

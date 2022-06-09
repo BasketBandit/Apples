@@ -42,15 +42,10 @@
             <div class="btn btn-danger giveup d-none">Tell me!</div>
         </div>
 
-        <iframe style="display: none" scrolling="no" allow="autoplay" frameborder="no" th:src="@{https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{id}&auto_play=false(id=${sound})}"></iframe>
+        <iframe id="player" style="display: none" scrolling="no" allow="autoplay" frameborder="no"></iframe>
 
+        <script th:src="|/js/jquery-ui-1.13.1.min.js|"></script>
         <script th:src="|/js/heardle/soundcloudapi.js|"></script>
         <script th:src="|/js/heardle/heardle.js|"></script>
-        <script th:src="|/js/jquery-ui-1.13.1.min.js|"></script>
-        <script th:inline="javascript">
-            $(".text").autocomplete({
-              source: [[${sounds}]]
-            });
-        </script>
     </body>
 </html>

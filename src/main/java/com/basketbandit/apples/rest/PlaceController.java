@@ -3,7 +3,6 @@ package com.basketbandit.apples.rest;
 import com.basketbandit.apples.scheduler.ScheduleHandler;
 import com.basketbandit.apples.scheduler.jobs.UpdateJob;
 import com.basketbandit.apples.scheduler.tasks.UpdateImageTask;
-import com.basketbandit.apples.util.Utilities;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,8 +35,6 @@ public class PlaceController implements Controller<Object> {
 
     @GetMapping("")
     public ModelAndView place() {
-        ModelAndView modelAndView = new ModelAndView("./place/index");
-        modelAndView.addObject("image", Utilities.image2base64(image));
-        return modelAndView;
+        return new ModelAndView("./place/index");
     }
 }

@@ -1,8 +1,8 @@
 package com.basketbandit.apples.rest;
 
-import com.basketbandit.apples.util.Sanitiser;
+import com.basketbandit.apples.util.Utilities;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,12 +13,11 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 
 @RestController
-@RequestMapping("/wordle")
 public class WordleController implements Controller<Object> {
     private static final HashMap<Integer, ArrayList<String>> words = new HashMap<>();
+    record RandomWord(ArrayList<String> words, String random_word){}
 
     public WordleController() {
         try(BufferedReader r = new BufferedReader(new InputStreamReader(new FileInputStream("./data/wordle.txt"), StandardCharsets.UTF_8))) {
@@ -37,29 +36,16 @@ public class WordleController implements Controller<Object> {
         return words;
     }
 
-    @GetMapping("")
-    public ModelAndView wordle(@RequestParam(defaultValue = "5") String letters) {
-        int type = Sanitiser.isNumeric(letters) ? Integer.parseInt(letters) : 5;
-        type = words.containsKey(type) ? type : 5;
-        ArrayList<String> list = words.getOrDefault(type, words.get(5)); // this should ensure that all possible inputs will resolve
-        ModelAndView modelAndView = new ModelAndView("./wordle/index");
-        modelAndView.addObject("letters", words.keySet());
-        modelAndView.addObject("word", list.get(new Random(System.currentTimeMillis()).nextInt(list.size())));
-        modelAndView.addObject("words", list);
-        modelAndView.addObject("length", type);
-        return modelAndView;
+    @GetMapping("/wordle")
+    public ModelAndView wordle(@RequestParam(defaultValue = "5") int letters) {
+        return new ModelAndView("./wordle/index")
+                .addObject("keys", words.keySet())
+                .addObject("example", words.getOrDefault(letters, words.get(5)).get(0));
     }
 
-    @GetMapping("/api/v1/words")
-    public ArrayList<String> words(@RequestParam(defaultValue = "5") String letters) {
-        int x = Sanitiser.isNumeric(letters) ? Integer.parseInt(letters) : 5;
-        return words.getOrDefault(x, words.get(5));
-    }
-
-    @GetMapping("/api/v1/word")
-    public String word(@RequestParam(defaultValue = "5") String letters) {
-        int x = Sanitiser.isNumeric(letters) ? Integer.parseInt(letters) : 5;
-        ArrayList<String> list = words.getOrDefault(x, words.get(5));
-        return words.getOrDefault(x, words.get(5)).get(new Random(System.currentTimeMillis()).nextInt(list.size()));
+    @GetMapping("/api/v1/words/{letters}")
+    public RandomWord words(@PathVariable("letters") int letters) {
+        ArrayList<String> wordList = words.getOrDefault(letters, words.get(5));
+        return new RandomWord(wordList, wordList.get(Utilities.random(wordList.size())));
     }
 }

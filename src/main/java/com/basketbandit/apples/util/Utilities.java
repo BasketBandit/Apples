@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UncheckedIOException;
 import java.util.Base64;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Utilities {
 
@@ -23,5 +24,14 @@ public class Utilities {
         } catch(final IOException ioe) {
             throw new UncheckedIOException(ioe);
         }
+    }
+
+    /**
+     * Generates a thread local random integer within the given bounds.
+     * @param bound int
+     * @return int
+     */
+    public static int random(int bound) {
+        return ThreadLocalRandom.current().nextInt(bound);
     }
 }

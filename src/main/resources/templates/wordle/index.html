@@ -9,27 +9,23 @@
 
         <div class="container text-center mt-2 shaded">
             <div class="container text-center mb-4">
-                <a th:class="${length == letterLength} ? 'box border m-n1 kinda' : 'box border m-n1' " th:href="${'/wordle?letters=' + letterLength}" th:each="letterLength : ${letters}">
-                    <div th:text="${letterLength}"></div>
+                <a th:class="${example.length == key} ? 'box border m-n1 kinda' : 'box border m-n1' " th:href="${'/wordle?letters=' + key}" th:each="key : ${keys}">
+                    <div th:class="${example.length == key} ? 'key' : ''" th:text="${key}"></div>
                 </a>
             </div>
 
             <div th:id="a+${x}" class="d-flex justify-content-center" th:each="x:${#numbers.sequence(0, 4, 1)}" th:data_id="${x}">
-                <div th:id="l+${y}" class="box border m-n1" th:each="y:${#numbers.sequence(0, length-1, 1)}" th:data_id="${y}"></div>
+                <div th:id="l+${y}" class="box border m-n1" th:each="y:${#numbers.sequence(0, example.length-1, 1)}" th:data_id="${y}"></div>
             </div>
 
             <div id="input" class="input-group mt-4">
-                <input type="text" class="text form-control" th:maxlength="${length}" th:minlength="${length}">
+                <input type="text" class="text form-control" th:maxlength="${example.length}" th:minlength="${example.length}">
                 <div class="input-group-append">
                     <button id="submit" class="btn btn-outline-secondary" type="button">Submit</button>
                 </div>
             </div>
         </div>
 
-        <script th:inline="javascript">
-            var words = [[${words}]];
-            var word = [[${word}]];
-        </script>
         <script th:src="|/js/wordle/wordle.js|"></script>
     </body>
 </html>

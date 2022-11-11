@@ -1,6 +1,6 @@
-package com.basketbandit.apples;
+package com.basketbandit.booba;
 
-import com.basketbandit.apples.socket.PlaceSocketHandler;
+import com.basketbandit.booba.socket.PlaceSocketHandler;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

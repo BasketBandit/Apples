@@ -1,4 +1,4 @@
-package com.basketbandit.apples.scheduler;
+package com.basketbandit.booba.scheduler;
 
 import java.util.HashSet;
 import java.util.Set;

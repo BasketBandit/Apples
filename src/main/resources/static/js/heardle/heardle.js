@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $.get("/api/v1/sounds/", function(data, status){
+    $.get("/api/v1/sounds", function(data, status){
         var iframeElement = document.getElementById('player');
             iframeElement.setAttribute("src", "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/" + data['random_sound'] + "&auto_play=false")
         var player = SC.Widget(iframeElement);

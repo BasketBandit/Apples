@@ -1,8 +1,8 @@
-package com.basketbandit.apples.socket;
+package com.basketbandit.booba.socket;
 
-import com.basketbandit.apples.rest.PlaceController;
-import com.basketbandit.apples.util.Sanitiser;
-import com.basketbandit.apples.util.Utilities;
+import com.basketbandit.booba.rest.PlaceController;
+import com.basketbandit.booba.util.Sanitiser;
+import com.basketbandit.booba.util.Utilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

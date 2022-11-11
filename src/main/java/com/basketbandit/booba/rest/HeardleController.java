@@ -1,6 +1,6 @@
-package com.basketbandit.apples.rest;
+package com.basketbandit.booba.rest;
 
-import com.basketbandit.apples.util.Utilities;
+import com.basketbandit.booba.util.Utilities;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,7 +13,6 @@ import java.util.Collection;
 import java.util.HashMap;
 
 @RestController
-
 public class HeardleController implements Controller<Object> {
     private static final HashMap<String, String> sounds = new HashMap<>();
     record RandomSound(Collection<String> sounds, String random_sound){}

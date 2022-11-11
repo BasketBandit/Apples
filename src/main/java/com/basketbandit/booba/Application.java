@@ -1,4 +1,4 @@
-package com.basketbandit.apples;
+package com.basketbandit.booba;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

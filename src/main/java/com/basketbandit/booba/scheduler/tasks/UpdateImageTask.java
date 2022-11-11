@@ -1,7 +1,7 @@
-package com.basketbandit.apples.scheduler.tasks;
+package com.basketbandit.booba.scheduler.tasks;
 
-import com.basketbandit.apples.rest.PlaceController;
-import com.basketbandit.apples.scheduler.Task;
+import com.basketbandit.booba.rest.PlaceController;
+import com.basketbandit.booba.scheduler.Task;
 
 import javax.imageio.ImageIO;
 import java.io.File;

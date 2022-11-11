@@ -1,4 +1,4 @@
-package com.basketbandit.apples.util;
+package com.basketbandit.booba.util;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

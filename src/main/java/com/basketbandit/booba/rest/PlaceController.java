@@ -1,10 +1,9 @@
-package com.basketbandit.apples.rest;
+package com.basketbandit.booba.rest;
 
-import com.basketbandit.apples.scheduler.ScheduleHandler;
-import com.basketbandit.apples.scheduler.jobs.UpdateJob;
-import com.basketbandit.apples.scheduler.tasks.UpdateImageTask;
+import com.basketbandit.booba.scheduler.ScheduleHandler;
+import com.basketbandit.booba.scheduler.jobs.UpdateJob;
+import com.basketbandit.booba.scheduler.tasks.UpdateImageTask;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,7 +12,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 @RestController
-@RequestMapping("/place")
 public class PlaceController implements Controller<Object> {
     private static final BufferedImage image = new BufferedImage(500,282, BufferedImage.TYPE_INT_ARGB);
 
@@ -33,7 +31,7 @@ public class PlaceController implements Controller<Object> {
         return image;
     }
 
-    @GetMapping("")
+    @GetMapping("/place")
     public ModelAndView place() {
         return new ModelAndView("./place/index");
     }

@@ -1,7 +1,7 @@
-package com.basketbandit.apples.scheduler.jobs;
+package com.basketbandit.booba.scheduler.jobs;
 
-import com.basketbandit.apples.scheduler.Job;
-import com.basketbandit.apples.scheduler.tasks.UpdateImageTask;
+import com.basketbandit.booba.scheduler.Job;
+import com.basketbandit.booba.scheduler.tasks.UpdateImageTask;
 
 import java.util.concurrent.TimeUnit;
 

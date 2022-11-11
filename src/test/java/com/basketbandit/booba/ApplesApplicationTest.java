@@ -1,10 +1,10 @@
-package com.basketbandit.apples;
+package com.basketbandit.booba;
 
-import com.basketbandit.apples.rest.GenericController;
-import com.basketbandit.apples.rest.HeardleController;
-import com.basketbandit.apples.rest.PlaceController;
-import com.basketbandit.apples.rest.WordleController;
-import com.basketbandit.apples.util.Utilities;
+import com.basketbandit.booba.rest.GenericController;
+import com.basketbandit.booba.rest.HeardleController;
+import com.basketbandit.booba.rest.PlaceController;
+import com.basketbandit.booba.rest.WordleController;
+import com.basketbandit.booba.util.Utilities;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

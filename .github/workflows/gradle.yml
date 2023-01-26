@@ -1,4 +1,4 @@
-name: Java CI/CD with Gradle
+name: Java 19 CI/CD with Gradle
 
 on:
   push:

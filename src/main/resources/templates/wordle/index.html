@@ -1,12 +1,11 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <fragment th:replace="meta"></fragment>
-        <fragment th:replace="javascript"></fragment>
+        <fragment th:replace="~{meta}"></fragment>
+        <fragment th:replace="~{javascript}"></fragment>
     </head>
-    <body oncontextmenu="return false;">
-        <div th:replace="banner"></div>
-
+    <body>
+        <div th:replace="~{banner}"></div>
         <div class="container text-center mt-2 shaded">
             <div class="container text-center mb-4">
                 <a th:class="${example.length == key} ? 'box border m-n1 kinda' : 'box border m-n1' " th:href="${'/wordle?letters=' + key}" th:each="key : ${keys}">

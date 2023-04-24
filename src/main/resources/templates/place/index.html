@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <fragment th:replace="meta"></fragment>
-        <fragment th:replace="javascript"></fragment>
+        <fragment th:replace="~{meta}"></fragment>
+        <fragment th:replace="~{javascript}"></fragment>
     </head>
-    <body oncontextmenu="return false;">
-        <div th:replace="banner"></div>
+    <body>
+        <div th:replace="~{banner}"></div>
         <div id="canvas-controller">
             <div id="canvas-container" class="canvas-container text-center d-flex">
                 <canvas id="canvas"></canvas>

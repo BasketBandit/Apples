@@ -1,12 +1,12 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <fragment th:replace="meta"></fragment>
-        <fragment th:replace="javascript"></fragment>
+        <fragment th:replace="~{meta}"></fragment>
+        <fragment th:replace="~{javascript}"></fragment>
         <link rel="stylesheet" type="text/css" href="/css/jquery-ui-1.13.1.css">
     </head>
-    <body oncontextmenu="return false;">
-        <div th:replace="banner"></div>
+    <body>
+        <div th:replace="~{banner}"></div>
         <div class="container mt-2 shaded">
             <div id="track-information" class="d-flex rounded p-2">
                 <img id="track-art" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="/>

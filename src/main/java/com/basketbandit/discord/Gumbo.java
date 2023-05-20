@@ -8,16 +8,24 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+
 public class Gumbo extends ListenerAdapter {
     public Gumbo() {
-        JDA jda = JDABuilder.createDefault(System.getenv("DISCORD_BOT_TOKEN"))
-                .enableIntents(GatewayIntent.MESSAGE_CONTENT) // enables explicit access to message.getContentDisplay()
-                .build();
-
-        jda.addEventListener(new Gumbo());
-        jda.updateCommands().addCommands(
-                Commands.slash("ping", "Calculate ping of the bot")
-        ).queue();
+        try(BufferedReader token = new BufferedReader(new InputStreamReader(new FileInputStream("./data/discordtoken.txt"), StandardCharsets.UTF_8))) {
+            JDA jda = JDABuilder.createDefault(token.readLine())
+                    .enableIntents(GatewayIntent.MESSAGE_CONTENT) // enables explicit access to message.getContentDisplay()
+                    .build();
+            jda.addEventListener(new Gumbo());
+            jda.updateCommands().addCommands(
+                    Commands.slash("ping", "Calculate ping of the bot")
+            ).queue();
+        } catch(Exception e) {
+            System.out.println("Something went wrong! " + e.getMessage());
+        }
     }
 
     @Override

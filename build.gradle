@@ -15,10 +15,16 @@ repositories {
 }
 
 dependencies {
+	// Spring
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// Discord Bot
+	implementation("net.dv8tion:JDA:5.0.0-beta.6") {
+		exclude module: 'opus-java'
+	}
 }
 
 tasks.named('test') {

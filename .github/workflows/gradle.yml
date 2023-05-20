@@ -47,6 +47,8 @@ jobs:
 
       - name: Build and Push
         uses: docker/build-push-action@v3
+        env:
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
         with:
           context: .
           push: true

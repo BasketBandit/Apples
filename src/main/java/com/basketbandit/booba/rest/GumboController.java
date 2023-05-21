@@ -7,16 +7,20 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
+@RestController
 public class GumboController extends ListenerAdapter implements Controller  {
+    private static JDA jda;
+
     public GumboController() {
         try(BufferedReader token = new BufferedReader(new InputStreamReader(new FileInputStream("./data/discordtoken.txt"), StandardCharsets.UTF_8))) {
-            JDA jda = JDABuilder.createDefault(token.readLine())
+            jda = JDABuilder.createDefault(token.readLine())
                     .enableIntents(GatewayIntent.MESSAGE_CONTENT) // enables explicit access to message.getContentDisplay()
                     .build();
             jda.addEventListener(new GumboController());

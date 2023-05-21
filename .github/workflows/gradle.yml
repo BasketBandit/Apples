@@ -57,7 +57,7 @@ jobs:
     needs: build
     steps:
       - name: Deploy Application (Docker)
-        uses: appleboy/ssh-action@v0.1.4
+        uses: appleboy/ssh-action@v0.1.10
         env:
           TAG: ${{ secrets.DOCKERHUB_TAG }}
         with:

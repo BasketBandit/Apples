@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 @RestController
-public class PlaceController implements Controller<Object> {
+public class PlaceController implements Controller {
     private static final BufferedImage image = new BufferedImage(500,282, BufferedImage.TYPE_INT_ARGB);
 
     public PlaceController() {
@@ -26,7 +26,6 @@ public class PlaceController implements Controller<Object> {
         }
     }
 
-    @Override
     public BufferedImage getData() {
         return image;
     }

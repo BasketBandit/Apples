@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.HashMap;
 
 @RestController
-public class HeardleController implements Controller<Object> {
+public class HeardleController implements Controller {
     private static final HashMap<String, String> sounds = new HashMap<>();
     record RandomSound(Collection<String> sounds, String random_sound){}
 
@@ -30,7 +30,6 @@ public class HeardleController implements Controller<Object> {
         }
     }
 
-    @Override
     public HashMap<String, String> getData() {
         return sounds;
     }

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 @RestController
-public class WordleController implements Controller<Object> {
+public class WordleController implements Controller {
     private static final HashMap<Integer, ArrayList<String>> words = new HashMap<>();
     record RandomWord(ArrayList<String> words, String random_word){}
 
@@ -31,7 +31,6 @@ public class WordleController implements Controller<Object> {
         }
     }
 
-    @Override
     public HashMap<Integer, ArrayList<String>> getData() {
         return words;
     }

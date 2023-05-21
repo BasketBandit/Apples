@@ -5,12 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-public class GenericController implements Controller<Object> {
-    @Override
-    public Object getData() {
-        return null;
-    }
-
+public class GenericController implements Controller {
     @GetMapping("/")
     public ModelAndView root() {
         return new ModelAndView("index");

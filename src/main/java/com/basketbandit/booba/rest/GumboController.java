@@ -23,7 +23,7 @@ public class GumboController extends ListenerAdapter implements Controller  {
             jda = JDABuilder.createDefault(token.readLine())
                     .enableIntents(GatewayIntent.MESSAGE_CONTENT) // enables explicit access to message.getContentDisplay()
                     .build();
-            jda.addEventListener(new GumboController());
+            jda.addEventListener(this);
             jda.updateCommands().addCommands(
                     Commands.slash("ping", "Calculate ping of the bot")
             ).queue();

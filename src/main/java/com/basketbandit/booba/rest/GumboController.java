@@ -51,6 +51,10 @@ public class GumboController extends ListenerAdapter implements Controller  {
     public void onMessageReceived(MessageReceivedEvent event) {}
 
     public static void sendFile(long channel, InputStream inputStream, String name) {
-        jda.getThreadChannelById(channel).sendFiles(FileUpload.fromData(inputStream, name)).queue();
+        try {
+            jda.awaitReady().getThreadChannelById(channel).sendFiles(FileUpload.fromData(inputStream, name)).queue();
+        } catch(Exception e) {
+            log.warn("There was an issue sending file to discord: {}", e.getMessage(), e);
+        }
     }
 }

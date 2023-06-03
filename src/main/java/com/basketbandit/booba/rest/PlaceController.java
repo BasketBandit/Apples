@@ -11,11 +11,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.InputStream;
+import java.sql.Time;
+import java.time.Instant;
+import java.util.Arrays;
 
 @RestController
 public class PlaceController implements Controller {
     private static final BufferedImage image = new BufferedImage(500,282, BufferedImage.TYPE_INT_ARGB);
+    private static byte[] imageByteArray = new byte[0];
 
     public PlaceController() {
         try {
@@ -29,8 +36,31 @@ public class PlaceController implements Controller {
         }
     }
 
-    public BufferedImage getData() {
+    public static BufferedImage image() {
         return image;
+    }
+
+    public static void writeToDisk() {
+        try {
+            ImageIO.write(image, "png", new File("./data/canvas.png"));
+        } catch(Exception e) {
+            log.error("Something went wrong while saving canvas.png... {}", e.getMessage(), e);
+        }
+    }
+
+    public static void backupToDiscord() {
+        try {
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            ImageIO.write(image, "png", os);
+            byte[] newByteArray = os.toByteArray();
+            if(!Arrays.equals(imageByteArray, newByteArray)) {
+                imageByteArray = newByteArray;
+                InputStream inputStream = new ByteArrayInputStream(imageByteArray);
+                GumboController.sendFile(1114649660003450910L, inputStream, Time.from(Instant.now()).toString());
+            }
+        } catch(Exception e) {
+            log.error("Something went wrong! {}", e.getMessage(), e);
+        }
     }
 
     @GetMapping("/place")

@@ -34,6 +34,6 @@ class ApplesApplicationTest {
 	void dataIsLoaded() {
 		assertThat(wordleController.getData().isEmpty()).isFalse();
 		assertThat(heardleController.getData().isEmpty()).isFalse();
-		assertThat(Utilities.image2base64(placeController.getData()).equals("")).isFalse();
+		assertThat(Utilities.image2base64(PlaceController.image()).equals("")).isFalse();
 	}
 }

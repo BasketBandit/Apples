@@ -3,22 +3,13 @@ package com.basketbandit.booba.scheduler.tasks;
 import com.basketbandit.booba.rest.PlaceController;
 import com.basketbandit.booba.scheduler.Task;
 
-import javax.imageio.ImageIO;
-import java.io.File;
-
 public class UpdateImageTask implements Task {
-    private static final PlaceController placeController = new PlaceController();
-
-    public UpdateImageTask() {
-    }
-
     @Override
     public void run() {
         try {
-            ImageIO.write(placeController.getData(), "png", new File("./data/canvas.png"));
+            PlaceController.writeToDisk();
         } catch(Exception e) {
             log.error("Unable to write canvas.png to disk, reason: {}", e.getMessage(), e);
         }
     }
-
 }

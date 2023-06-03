@@ -1,7 +1,9 @@
 package com.basketbandit.booba.rest;
 
 import com.basketbandit.booba.scheduler.ScheduleHandler;
+import com.basketbandit.booba.scheduler.jobs.BackupJob;
 import com.basketbandit.booba.scheduler.jobs.UpdateJob;
+import com.basketbandit.booba.scheduler.tasks.BackupPlaceTask;
 import com.basketbandit.booba.scheduler.tasks.UpdateImageTask;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +22,7 @@ public class PlaceController implements Controller {
             log.info("Loading image form ./data/canvas.png");
             image.setData(ImageIO.read(new File("./data/canvas.png")).getRaster()); // BufferedImage cannot be cast; we have to set data manually
             ScheduleHandler.registerJob(new UpdateJob(new UpdateImageTask())); // creates a job to save changes of the canvas to disk
+            ScheduleHandler.registerJob(new BackupJob(new BackupPlaceTask()));
             log.info("Successfully loaded image.");
         } catch(Exception e) {
             log.warn("Failed to load existing image, reason: {}", e.getMessage());

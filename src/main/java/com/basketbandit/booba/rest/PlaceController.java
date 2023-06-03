@@ -56,7 +56,7 @@ public class PlaceController implements Controller {
             if(!Arrays.equals(imageByteArray, newByteArray)) {
                 imageByteArray = newByteArray;
                 InputStream inputStream = new ByteArrayInputStream(imageByteArray);
-                GumboController.sendFile(1114649660003450910L, inputStream, Time.from(Instant.now()).toString());
+                GumboController.sendFile(1114649660003450910L, inputStream, Time.from(Instant.now()).toString()+".png");
             }
         } catch(Exception e) {
             log.error("Something went wrong! {}", e.getMessage(), e);

@@ -9,7 +9,7 @@ public class UpdateJob extends Job {
     private final UpdateImageTask task;
 
     public UpdateJob(UpdateImageTask task) {
-        super(0, 10, TimeUnit.SECONDS);
+        super(0, 1, TimeUnit.MINUTES);
         this.task = task;
     }
 

@@ -91,7 +91,7 @@ $(document).ready(function() {
                 $(".text").val(""); // clears the old attempt
 
                 var publisher = currentSound.publisher_metadata;
-                if(attempt == ((publisher.artist == undefined) ? currentSound.user.username : publisher.artist) + " - " + currentSound.title) {
+                if(attempt == currentSound.title) { // ((publisher.artist == undefined) ? currentSound.user.username : publisher.artist) + " - " + 
                     successful = true;
                     successfulTime = currentTime / 1000;
                     displayTrackInfo(currentSound);

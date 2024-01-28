@@ -1,6 +1,9 @@
 package com.basketbandit.booba.rest;
 
 import com.basketbandit.booba.util.Utilities;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,10 +23,16 @@ public class HeardleController implements Controller {
     public HeardleController() {
         try(BufferedReader r = new BufferedReader(new InputStreamReader(new FileInputStream("./data/heardle.txt"), StandardCharsets.UTF_8))) {
             log.info("Parsing sounds from ./data/heardle.txt");
-            r.lines().forEach(sound -> {
-                String[] data = sound.split(",", 2);
-                sounds.putIfAbsent(data[0], data[1]);
+
+            StringBuilder sb = new StringBuilder();
+            r.lines().forEach(sb::append);
+            JsonArray tracks = JsonParser.parseString(sb.toString()).getAsJsonArray();
+
+            tracks.forEach(track -> {
+                JsonObject t = track.getAsJsonObject();
+                sounds.putIfAbsent(t.get("id").getAsString(), t.get("title").getAsString());
             });
+
             log.info("Successfully parsed " + sounds.size() + " sounds." );
         } catch(Exception e) {
             log.warn("There was an issue while reading the heardle data file, reason: {}", e.getMessage(), e);

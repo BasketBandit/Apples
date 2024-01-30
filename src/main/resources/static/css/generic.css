@@ -222,6 +222,7 @@ a, a:visited, a:hover, a:active {
 .shaded {
     background: #eeeeee;
     padding: 1em;
+    padding-bottom: 45px;
     border-radius: 5px;
 }
 
@@ -302,7 +303,10 @@ progress[value]::-webkit-progress-value {
 }
 
 .play, .help, .giveup {
-    width: 110px;
+    width: 49%;
+    height: 50px;
+    position: relative;
+    line-height: 35px;
 }
 
 /*********************************************/

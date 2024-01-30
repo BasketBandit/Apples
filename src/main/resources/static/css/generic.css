@@ -142,6 +142,7 @@ a, a:visited, a:hover, a:active {
 
 .keyboard {
     margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .keyboard-key, .submit-key, .backspace-key {

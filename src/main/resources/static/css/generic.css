@@ -140,6 +140,48 @@ a, a:visited, a:hover, a:active {
     text-align: center;
 }
 
+.keyboard {
+    margin-top: 30px;
+}
+
+.keyboard-key, .submit-key, .backspace-key {
+    font-size: 1.25em;
+    font-weight: bold;
+    border: 0;
+    padding: 10px;
+    margin: 2px 1px 2px 1px;
+    min-width: 40px;
+    height: 58px;
+    border-radius: 4px;
+    user-select: none;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    background-color: darkgray;
+    color: white;
+}
+
+.incorrect, .kinda, .correct {
+    color: #FFFFFF !important;
+    -webkit-transition: all 0.5s linear;
+    -moz-transition: all 0.5s linear;
+    -o-transition: all 0.5s linear;
+    transition: all 0.5s linear;
+}
+
+.incorrect {
+    background: #A2A2A2;
+}
+
+.kinda {
+    background: #FFD55E;
+}
+
+.correct {
+    background: #4CBB17;
+}
+
 /*********************************************/
 /*********************************************/
 /*********************************************/

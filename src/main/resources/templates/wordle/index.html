@@ -13,16 +13,55 @@
                 </a>
             </div>
 
-            <div th:id="a+${x}" class="d-flex justify-content-center" th:each="x:${#numbers.sequence(0, 4, 1)}" th:data_id="${x}">
+            <div th:id="a+${x}" class="d-flex justify-content-center" th:each="x:${#numbers.sequence(0, 5, 1)}" th:data_id="${x}">
                 <div th:id="l+${y}" class="box border m-n1" th:each="y:${#numbers.sequence(0, example.length-1, 1)}" th:data_id="${y}"></div>
             </div>
 
-            <div id="input" class="input-group mt-4">
-                <input type="text" class="text form-control" th:maxlength="${example.length}" th:minlength="${example.length}">
-                <div class="input-group-append">
-                    <button id="submit" class="btn btn-outline-secondary" type="button">Submit</button>
+            <div class="keyboard" role="group" aria-label="Keyboard">
+                <div class="keyboard-row">
+                    <button type="button" data-key="Q" aria-label="add q" class="keyboard-key">Q</button>
+                    <button type="button" data-key="W" aria-label="add w" class="keyboard-key">W</button>
+                    <button type="button" data-key="E" aria-label="add e" class="keyboard-key">E</button>
+                    <button type="button" data-key="R" aria-label="add r" class="keyboard-key">R</button>
+                    <button type="button" data-key="T" aria-label="add t" class="keyboard-key">T</button>
+                    <button type="button" data-key="Y" aria-label="add y" class="keyboard-key">Y</button>
+                    <button type="button" data-key="U" aria-label="add u" class="keyboard-key">U</button>
+                    <button type="button" data-key="I" aria-label="add i" class="keyboard-key">I</button>
+                    <button type="button" data-key="O" aria-label="add o" class="keyboard-key">O</button>
+                    <button type="button" data-key="P" aria-label="add p" class="keyboard-key">P</button>
+                </div>
+                <div class="keyboard-row">
+                    <div data-testid="spacer" class="keyboard-spacer"></div>
+                    <button type="button" data-key="A" aria-label="add a" class="keyboard-key">A</button>
+                    <button type="button" data-key="S" aria-label="add s" class="keyboard-key">S</button>
+                    <button type="button" data-key="D" aria-label="add d" class="keyboard-key">D</button>
+                    <button type="button" data-key="F" aria-label="add f" class="keyboard-key">F</button>
+                    <button type="button" data-key="G" aria-label="add g" class="keyboard-key">G</button>
+                    <button type="button" data-key="H" aria-label="add h" class="keyboard-key">H</button>
+                    <button type="button" data-key="J" aria-label="add j" class="keyboard-key">J</button>
+                    <button type="button" data-key="K" aria-label="add k" class="keyboard-key">K</button>
+                    <button type="button" data-key="L" aria-label="add l" class="keyboard-key">L</button>
+                    <div data-testid="spacer" class="keyboard-spacer"></div>
+                </div>
+                <div class="keyboard-row">
+                    <button type="button" data-key="↵" aria-label="enter" class="submit-key">ENTER</button>
+                    <button type="button" data-key="Z" aria-label="add z" class="keyboard-key">Z</button>
+                    <button type="button" data-key="X" aria-label="add x" class="keyboard-key">X</button>
+                    <button type="button" data-key="C" aria-label="add c" class="keyboard-key">C</button>
+                    <button type="button" data-key="V" aria-label="add v" class="keyboard-key">V</button>
+                    <button type="button" data-key="B" aria-label="add b" class="keyboard-key">B</button>
+                    <button type="button" data-key="N" aria-label="add n" class="keyboard-key">N</button>
+                    <button type="button" data-key="M" aria-label="add m" class="keyboard-key">M</button>
+                    <button type="button" data-key="←" aria-label="backspace" class="backspace-key">
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20" class="game-icon" data-testid="icon-backspace">
+                            <path fill="white" d="M22 3H7c-.69 0-1.23.35-1.59.88L0 12l5.41 8.11c.36.53.9.89 1.59.89h15c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H7.07L2.4 12l4.66-7H22v14zm-11.59-2L14 13.41 17.59 17 19 15.59 15.41 12 19 8.41 17.59 7 14 10.59 10.41 7 9 8.41 12.59 12 9 15.59z"></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
+
+            <div id="input"></div>
+            
         </div>
 
         <script th:src="|/js/wordle/wordle.js|"></script>

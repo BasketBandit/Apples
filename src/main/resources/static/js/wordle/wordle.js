@@ -4,6 +4,7 @@ $(document).ready(function() {
         var words = data['words'];
         var letters = word.split("");
         var letterMap = new Map();
+        var input = [];
         var attempts = [];
         var complete = false;
         var failed = false;
@@ -17,52 +18,74 @@ $(document).ready(function() {
             }
         }
 
-        $(".text").keydown(function(e){
-            if(e.keyCode === 13) {
-                submitAttempt(letterMap);
+        $(".keyboard-key").on("click", function(e) {
+            if(!complete && input.length < letters.length) {
+                $("#a"+attempts.length+" #l"+input.length).text($(this).data('key'));
+                input.push($(this).data('key'));
             }
         });
 
-        $('.btn').on('click', function() {
-            submitAttempt(letterMap);
+        $('.backspace-key').on('click', function(e) {
+            if(input.length > 0) {
+                $("#a"+attempts.length+" #l"+(input.length-1)).text("");
+                input.pop();
+            }
         })
 
-        function submitAttempt(map) {
-            var attempt = $(".text").val().toUpperCase();
+        $('.submit-key').on('click', function(e) {
+            submitAttempt(input.join(""));
+        })
 
-            // validates an attempt for length and if it is a dictionary word
-            if(complete || attempt.length < letters.length || !words.includes(attempt)) {
+        function submitAttempt(string) {
+            if(complete) {
                 return;
             }
 
-            $(".text").val(""); // clears the old attempt
-            attempts.push(attempt);
+            if(string.length < letters.length) {
+                console.log("word too short")
+                return;
+            }
 
-            var letterMap = new Map(map); // clone map
+            if(!words.includes(string)) {
+                console.log("word doesn't exist");
+                return;
+            }
+
+            input = [];
+            attempts.push(string);
+
+            var map = new Map(letterMap); // clone map
             var index = attempts.length-1;
             var attempt = attempts[index].split("");
 
-            // set boxes to players attempt (doing this in a separate loop is obv inefficient but i'm the dev i don't care ¦])
             for(var i = 0; i < attempt.length; i++) {
-                $("#a"+(index)+" #l"+i).text(attempt[i]);
+                $("#a"+(index)+" #l"+i).addClass('incorrect');
             }
 
-            // check each letter of the attempt against the answer, colour the matching positions in green
+            // check each letter of the attempt against the answer, colour the matching letters in matching positions in green
             var correctPosition = 0;
             for(var i = 0; i < attempt.length; i++) {
                 if(attempt[i] == letters[i]) {
-                    $("#a"+(index)+" #l"+i).css({
-                        'background': '#4CBB17',
-                        '-webkit-transition': 'all 0.5s linear',
-                        '-moz-transition': 'all 0.5s linear',
-                        '-o-transition': 'all 0.5s linear',
-                        'transition': 'all 0.5s linear',
-                    });
+                    $("#a"+(index)+" #l"+i).addClass('correct');
+                    $('.keyboard-key:contains("'+(attempt[i])+'")').addClass('correct');
                     correctPosition++;
-                    if(letterMap.get(attempt[i]) == 1) {
-                        letterMap.delete(attempt[i]);
+                    if(map.get(attempt[i]) == 1) {
+                        map.delete(attempt[i]);
                     } else {
-                        letterMap.set(attempt[i], (letterMap.get(attempt[i])-1));
+                        map.set(attempt[i], (map.get(attempt[i])-1));
+                    }
+                }
+            }
+
+            // check each letter of the attempt against the answer, colour the matching letters in non-matching positions in yellow
+            for(var i = 0; i < attempt.length; i++) {
+                if(map.has(attempt[i]) && letters.includes(attempt[i]) && (attempt[i] != letters[i])) {
+                    $("#a"+(index)+" #l"+i).addClass('kinda');
+                    $('.keyboard-key:contains("'+(attempt[i])+'")').addClass('kinda');
+                    if(map.get(attempt[i]) == 1) {
+                        map.delete(attempt[i]);
+                    } else {
+                        map.set(attempt[i], (map.get(attempt[i])-1));
                     }
                 }
             }
@@ -77,26 +100,8 @@ $(document).ready(function() {
                 return;
             }
 
-            // check each letter of the attempt against the answer, colour the non-matching positions in yellow
-            for(var i = 0; i < attempt.length; i++) {
-                if(letterMap.has(attempt[i]) && letters.includes(attempt[i]) && (attempt[i] != letters[i])) {
-                    $("#a"+(index)+" #l"+i).css({
-                        'background': '#FFD55E',
-                        '-webkit-transition': 'all 0.5s linear',
-                        '-moz-transition': 'all 0.5s linear',
-                        '-o-transition': 'all 0.5s linear',
-                        'transition': 'all 0.5s linear',
-                    });
-                    if(letterMap.get(attempt[i]) == 1) {
-                        letterMap.delete(attempt[i]);
-                    } else {
-                        letterMap.set(attempt[i], (letterMap.get(attempt[i])-1));
-                    }
-                }
-            }
-
             // if player has run out of attempts, offer an easier difficulty (lim 3)
-            if(attempts.length > 4) {
+            if(attempts.length > 5) {
                 complete = true;
                 $("#input").html("<a href='wordle?letters=" + word.length + "'><div id='notification' class='p-4 m-4'>Yikes... it was " + word + "</div></a>").removeClass("input-group").addClass('wrong');
                 if(word.length > 3) {

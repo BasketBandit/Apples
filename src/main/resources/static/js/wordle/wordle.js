@@ -90,6 +90,13 @@ $(document).ready(function() {
                 }
             }
 
+            // check each letter of the attempt against the answer, colour the non-matching letters
+            for(var i = 0; i < attempt.length; i++) {
+                if(!letters.includes(attempt[i])) {
+                    $('.keyboard-key:contains("'+(attempt[i])+'")').addClass('incorrect-keyboard')
+                }
+            }
+
             // if player has guessed correctly, offer harder difficulty (lim 15)
             if(correctPosition == letters.length) {
                 complete = true;

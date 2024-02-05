@@ -1,5 +1,12 @@
 $(document).ready(function() {
-    $.get("/api/v1/words/"+$('.key').text(), function(data, status){
+
+    // check if query string exists
+    var param = new URLSearchParams(window.location.search);
+    if(!param.has('letters')) {
+        return
+    }
+
+    $.get("/api/v1/words/"+param.get('letters'), function(data, status){
         var word = data['random_word'];
         var words = data['words'];
         var letters = word.split("");
@@ -20,14 +27,14 @@ $(document).ready(function() {
 
         $(".keyboard-key").on("click", function(e) {
             if(!complete && input.length < letters.length) {
-                $("#a"+attempts.length+" #l"+input.length).text($(this).data('key'));
+                $("#row-"+attempts.length+" #column-"+input.length).text($(this).data('key'));
                 input.push($(this).data('key'));
             }
         });
 
         $('.backspace-key').on('click', function(e) {
             if(input.length > 0) {
-                $("#a"+attempts.length+" #l"+(input.length-1)).text("");
+                $("#row-"+attempts.length+" #column-"+(input.length-1)).text("");
                 input.pop();
             }
         })
@@ -59,14 +66,14 @@ $(document).ready(function() {
             var attempt = attempts[index].split("");
 
             for(var i = 0; i < attempt.length; i++) {
-                $("#a"+(index)+" #l"+i).addClass('incorrect');
+                $("#row-"+(index)+" #column-"+i).addClass('incorrect');
             }
 
             // check each letter of the attempt against the answer, colour the matching letters in matching positions in green
             var correctPosition = 0;
             for(var i = 0; i < attempt.length; i++) {
                 if(attempt[i] == letters[i]) {
-                    $("#a"+(index)+" #l"+i).addClass('correct');
+                    $("#row-"+(index)+" #column-"+i).addClass('correct');
                     $('.keyboard-key:contains("'+(attempt[i])+'")').addClass('correct');
                     correctPosition++;
                     if(map.get(attempt[i]) == 1) {
@@ -93,26 +100,31 @@ $(document).ready(function() {
             // check each letter of the attempt against the answer, colour the non-matching letters
             for(var i = 0; i < attempt.length; i++) {
                 if(!letters.includes(attempt[i])) {
-                    $('.keyboard-key:contains("'+(attempt[i])+'")').addClass('incorrect-keyboard')
+                    $('.keyboard-key:contains("'+(attempt[i])+'")').addClass('incorrect-keyboard');
                 }
             }
 
             // if player has guessed correctly, offer harder difficulty (lim 15)
             if(correctPosition == letters.length) {
                 complete = true;
-                $("#input").html("<a href='wordle?letters=" + word.length + "'><div id='notification' class='p-4 m-4'>gg go next</div></a>").removeClass("input-group").addClass('correct');
+                $(".modal").show();
+                $(".modal-content").append("<a href='wordle?letters=" + word.length + "'><div id='notification' class='p-4'>Next Round!</div></a>");
+                $("#notification").addClass('correct');
                 if(word.length < 15) {
-                    $("#input").append("<a href='wordle?letters=" + (word.length+1) + "'><div id='difficulty' class='p-2'>harder 😩</div></a>");
+                    $(".modal-content").append("<a href='wordle?letters=" + (word.length+1) + "'><div id='difficulty' class='p-2'>Harder!</div></a>");
                 }
+
                 return;
             }
 
             // if player has run out of attempts, offer an easier difficulty (lim 3)
             if(attempts.length > 5) {
                 complete = true;
-                $("#input").html("<a href='wordle?letters=" + word.length + "'><div id='notification' class='p-4 m-4'>Yikes... it was " + word + "</div></a>").removeClass("input-group").addClass('wrong');
+                $(".modal").show();
+                $(".modal-content").append("<a href='wordle?letters=" + word.length + "'><div id='notification' class='p-4'>Yikes... it was " + word + "...</div></a>");
+                $("#notification").addClass('wrong');
                 if(word.length > 3) {
-                    $("#input").append("<a href='wordle?letters=" + (word.length-1) + "'><div id='difficulty' class='p-2'>im sussy 😭</div></a>");
+                    $(".modal-content").append("<a href='wordle?letters=" + (word.length-1) + "'><div id='difficulty' class='p-2'>Easier!</div></a>");
                 }
             }
         }

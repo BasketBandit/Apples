@@ -36,10 +36,10 @@ public class WordleController implements Controller {
     }
 
     @GetMapping("/wordle")
-    public ModelAndView wordle(@RequestParam(defaultValue = "5") int letters) {
+    public ModelAndView wordle(@RequestParam(required = false, defaultValue = "-1") Integer letters) {
         return new ModelAndView("./wordle/index")
-                .addObject("keys", words.keySet())
-                .addObject("example", words.getOrDefault(letters, words.get(5)).get(0));
+                .addObject("letters", letters)
+                .addObject("keys", words.keySet());
     }
 
     @GetMapping("/api/v1/words/{letters}")

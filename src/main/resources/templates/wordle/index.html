@@ -6,15 +6,19 @@
     </head>
     <body>
         <div th:replace="~{banner}"></div>
-        <div class="container text-center mt-2 shaded">
-            <div class="container text-center mb-4">
-                <a th:class="${example.length == key} ? 'box border m-n1 kinda' : 'box border m-n1' " th:href="${'/wordle?letters=' + key}" th:each="key : ${keys}">
-                    <div th:class="${example.length == key} ? 'key' : ''" th:text="${key}"></div>
+
+        <div th:if="${letters == -1}" class="container text-center mt-2 shaded">
+            <div class="container text-center">
+                <h1 class="shaded">Select the number of letters you wish to play with!</h1>
+                <a class="box border correct m-n1" th:href="${'/wordle?letters=' + key}" th:each="key : ${keys}">
+                    <div th:class="${letters == key} ? 'key' : ''" th:text="${key}"></div>
                 </a>
             </div>
+        </div>
 
-            <div th:id="a+${x}" class="d-flex justify-content-center" th:each="x:${#numbers.sequence(0, 5, 1)}" th:data_id="${x}">
-                <div th:id="l+${y}" class="box border m-n1" th:each="y:${#numbers.sequence(0, example.length-1, 1)}" th:data_id="${y}"></div>
+        <div th:if="${letters != -1}" class="container text-center mt-2 shaded">
+            <div th:id="row-+${x}" class="d-flex justify-content-center" th:each="x:${#numbers.sequence(0, 5, 1)}" th:data_id="${x}">
+                <div th:id="column-+${y}" class="box border m-n1" th:each="y:${#numbers.sequence(0, letters-1, 1)}" th:data_id="${y}"></div>
             </div>
 
             <div class="keyboard" role="group" aria-label="Keyboard">
@@ -60,7 +64,9 @@
                 </div>
             </div>
 
-            <div id="input"></div>
+            <div id="results-modal" class="modal">
+                <div class="modal-content"></div>
+            </div>
             
         </div>
 

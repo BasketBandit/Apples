@@ -9,7 +9,7 @@
 
         <div th:if="${letters == -1}" class="container text-center mt-2 shaded">
             <div class="container text-center">
-                <h1 class="shaded">Select the number of letters you wish to play with!</h1>
+                <h1>Select the number of letters you wish to play with!</h1>
                 <a class="box border correct m-n1" th:href="${'/wordle?letters=' + key}" th:each="key : ${keys}">
                     <div th:class="${letters == key} ? 'key' : ''" th:text="${key}"></div>
                 </a>

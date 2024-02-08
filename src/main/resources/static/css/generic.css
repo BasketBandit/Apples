@@ -157,17 +157,7 @@ a, a:visited, a:hover, a:active {
     min-width: 48px!important;
 }
 
-.incorrect, .incorrect-keyboard, .kinda, .correct {
-    color: #FFFFFF !important;
-    -webkit-transition: all 0.5s linear;
-    -moz-transition: all 0.5s linear;
-    -o-transition: all 0.5s linear;
-    transition: all 0.5s linear;
-}
 
-.incorrect-keyboard {
-    background: #626262;
-}
 
 /*********************************************/
 /*********************************************/
@@ -275,6 +265,11 @@ progress[value]::-webkit-progress-value {
     line-height: 35px;
 }
 
+.wrong {
+    color: #ffffff;
+    background: #8F1C2A;
+}
+
 /*********************************************/
 /*********************************************/
 /*********************************************/
@@ -362,14 +357,22 @@ canvas {
 
 /* */
 
+.incorrect, .incorrect-keyboard, .kinda, .kinda-keyboard, .correct, .correct-keyboard {
+    color: #FFFFFF !important;
+    -webkit-transition: all 0.5s linear;
+    -moz-transition: all 0.5s linear;
+    -o-transition: all 0.5s linear;
+    transition: all 0.5s linear;
+}
+
 .incorrect {
     color: #ffffff;
     background: #A2A2A2;
 }
 
-.wrong {
+.incorrect-keyboard {
     color: #ffffff;
-    background: #8F1C2A;
+    background: #626262;
 }
 
 .kinda {
@@ -377,7 +380,17 @@ canvas {
     background: #FFD55E;
 }
 
+.kinda-keyboard {
+    color: #ffffff;
+    background: #FFD55E;
+}
+
 .correct {
+    color: #ffffff;
+    background: #4CBB17;
+}
+
+.correct-keyboard {
     color: #ffffff;
     background: #4CBB17;
 }

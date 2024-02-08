@@ -74,7 +74,7 @@ $(document).ready(function() {
             for(var i = 0; i < attempt.length; i++) {
                 if(attempt[i] == letters[i]) {
                     $("#row-"+(index)+" #column-"+i).addClass('correct');
-                    $('.keyboard-key:contains("'+(attempt[i])+'")').addClass('correct');
+                    $('.keyboard-key:contains("'+(attempt[i])+'")').addClass('correct-keyboard');
                     correctPosition++;
                     if(map.get(attempt[i]) == 1) {
                         map.delete(attempt[i]);
@@ -87,8 +87,8 @@ $(document).ready(function() {
             // check each letter of the attempt against the answer, colour the matching letters in non-matching positions in yellow
             for(var i = 0; i < attempt.length; i++) {
                 if(map.has(attempt[i]) && letters.includes(attempt[i]) && (attempt[i] != letters[i])) {
-                    $("#a"+(index)+" #l"+i).addClass('kinda');
-                    $('.keyboard-key:contains("'+(attempt[i])+'")').addClass('kinda');
+                    $("#row-"+(index)+" #column-"+i).addClass('kinda');
+                    $('.keyboard-key:contains("'+(attempt[i])+'")').addClass('kinda-keyboard');
                     if(map.get(attempt[i]) == 1) {
                         map.delete(attempt[i]);
                     } else {

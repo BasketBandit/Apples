@@ -27,14 +27,14 @@ $(document).ready(function() {
 
         $(".keyboard-key").on("click", function(e) {
             if(!complete && input.length < letters.length) {
-                $("#row-"+attempts.length+" #column-"+input.length).text($(this).data('key'));
+                $("#row-"+attempts.length+" #column-"+input.length).text($(this).data('key')).addClass('element-pop');
                 input.push($(this).data('key'));
             }
         });
 
         $('.backspace-key').on('click', function(e) {
             if(input.length > 0) {
-                $("#row-"+attempts.length+" #column-"+(input.length-1)).text("");
+                $("#row-"+attempts.length+" #column-"+(input.length-1)).text("").removeClass('element-pop');
                 input.pop();
             }
         })

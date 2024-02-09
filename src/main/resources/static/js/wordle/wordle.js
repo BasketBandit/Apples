@@ -50,11 +50,13 @@ $(document).ready(function() {
 
             if(string.length < letters.length) {
                 console.log("word too short")
+                $("#row-"+attempts.length).effect('shake', {distance: 5});
                 return;
             }
 
             if(!words.includes(string)) {
                 console.log("word doesn't exist");
+                $("#row-"+attempts.length).effect('shake', {distance: 5});
                 return;
             }
 

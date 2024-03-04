@@ -1,4 +1,4 @@
-FROM eclipse-temurin:20-alpine
+FROM eclipse-temurin:21-alpine
 
 WORKDIR /app
 

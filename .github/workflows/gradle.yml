@@ -36,9 +36,7 @@ jobs:
         with:
           cache-disabled: true
           gradle-version: 'current'
-
-      - name: Run Gradle build
-        run: ./gradlew build
+      - run: gradle build
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3.10.0

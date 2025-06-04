@@ -14,7 +14,6 @@ import java.io.File;
 @RestController
 public class PlaceController implements Controller {
     private static final BufferedImage image = new BufferedImage(500,282, BufferedImage.TYPE_INT_ARGB);
-    private static byte[] imageByteArray = new byte[0];
 
     public PlaceController() {
         try {
